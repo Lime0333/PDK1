@@ -20,7 +20,7 @@ inline ComponentID getNewComponentTypeID() {
 }
 
 template <typename T> inline ComponentID getComponentTypeID() noexcept {
-	static ComponentID typeID = getComponentTypeID();
+	static ComponentID typeID = getNewComponentTypeID();
 	return typeID;
 }
 
@@ -122,10 +122,10 @@ public:
 		for (auto i(0u); i < maxGroups; i++) {
 			auto& v(groupedEntities[i]);
 			v.erase(
-				std::remove_if(std;; begin(v), std::end(v), [i](Entity* mEntity)) {
-				return !mEntity->isACtive() || !mEntity->
-			}
-			)
+				std::remove_if(std::begin(v), std::end(v), [i](Entity* mEntity) {
+					return !mEntity->isActive() || !mEntity->hasGroup(i);
+					}),
+				std::end(v));
 		}
 
 		entities.erase(std::remove_if(std::begin(entities), std::end(entities),
@@ -135,8 +135,16 @@ public:
 			std::end(entities));
 	}
 
+	void AddToGroup(Entity* mEntity, Group mGroup) {
+		groupedEntities[mGroup].emplace_back(mEntity);
+	}
+
+	std::vector<Entity*>& getGroup(Group mGroup) {
+		return groupedEntities[mGroup];
+	}
+
 	Entity& addEntity() {
-		Entity* e = new Entity();
+		Entity* e = new Entity(*this);
 		std::unique_ptr<Entity> uPtr{ e };
 		entities.emplace_back(std::move(uPtr));
 		return *e;
