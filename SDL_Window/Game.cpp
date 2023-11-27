@@ -5,6 +5,7 @@
 #include "ECS/Components.h"
 #include"Vector2D.h"
 #include"Collision.h"
+#include"AssetManager.h"
 
 Map* map;
 Manager manager;
