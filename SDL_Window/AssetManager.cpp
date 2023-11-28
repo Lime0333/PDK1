@@ -2,6 +2,7 @@
 #include"ECS/Components.h"
 
 
+
 AssetManager::AssetManager(Manager* man) : manager(man){
 
 }
@@ -10,12 +11,14 @@ AssetManager::~AssetManager() {
 
 }
 
-void AssetManager::CreateProjectile(Vector2D pos, int range, int speed, std::string id)
+void AssetManager::CreateProjectile(Vector2D pos, Vector2D vel, int range, int speed, std::string id)
 {
 	auto& projectile(manager->addEntity());
 	projectile.addComponent<TransformComponent>(pos.x, pos.y, 32,32,1);
-	projectile.addComponent<SpriteComponent>("proj_test", false);
-	projectile.addComponent<ProjectileComponent>()
+	projectile.addComponent<SpriteComponent>(id, false);
+	projectile.addComponent<ProjectileComponent>(range, speed, vel);
+	projectile.addComponent<ColliderComponent>("projectile");
+	projectile.addGroup(Game::groupProjectiles);
 }
 
 void AssetManager::AddTexture(std::string id, const char* path) {
