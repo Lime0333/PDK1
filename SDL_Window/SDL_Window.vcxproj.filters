@@ -92,5 +92,8 @@
     <ClInclude Include="ECS\ProjectileComponent.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
+    <ClInclude Include="ECS\UILabel.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
