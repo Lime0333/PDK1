@@ -33,11 +33,24 @@ public:
 	SpriteComponent(std::string id, bool isAnimated) {
 		animated = isAnimated;
 
-		Animation idle = Animation(0, 3, 100);
-		Animation walk = Animation(1, 8, 100);
+		Animation idle = Animation(0, 1, 100);
+		Animation walk = Animation(1, 2, 250);
+
+		Animation idleUP = Animation(2, 1, 100);
+		Animation walkUP = Animation(3, 2, 250);
+
+		Animation idleDOWN = Animation(4, 1, 100);
+		Animation walkDOWN = Animation(5, 2, 250);
 
 		animations.emplace("Idle", idle);
 		animations.emplace("Walk", walk);
+
+		animations.emplace("IdleUP", idleUP);
+		animations.emplace("WalkUP", walkUP);
+
+		animations.emplace("IdleDOWN", idleDOWN);
+		animations.emplace("WalkDOWN", walkDOWN);
+
 
 		Play("Idle");
 

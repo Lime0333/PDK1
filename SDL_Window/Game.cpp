@@ -11,6 +11,7 @@
 Map* map;
 Manager manager;
 
+
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
 
@@ -22,6 +23,9 @@ bool Game::isRunning = false;
 
 auto& player(manager.addEntity());
 auto& label(manager.addEntity());
+
+int pozx,pozy,direction=0;
+//0=right 1=left 2=up 3=down
 
 Game::Game()
 {}
@@ -60,8 +64,13 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	}
 
 	assets->AddTexture("terrain", "assets/bg/terrain_ss.png");
-	assets->AddTexture("player", "assets/player_anims.png");
-	assets->AddTexture("projectile", "assets/proj.png");
+	assets->AddTexture("player", "assets/characters/ch1/ch1,2.png");
+	assets->AddTexture("playerUP", "assets/characters/ch1/ch1UP.png");
+
+	assets->AddTexture("projectileR", "assets/bullet/bulletR.png");
+	assets->AddTexture("projectileL", "assets/bullet/bulletL.png");
+	assets->AddTexture("projectileU", "assets/bullet/bulletU.png");
+	assets->AddTexture("projectileD", "assets/bullet/bulletD.png");
 
 	assets->AddFont("comic", "assets/comic.ttf", 16);
 
@@ -80,13 +89,8 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 	label.addComponent<UILabel>(10, 10, "Test String", "comic", white);
 
-	assets->CreateProjectile(Vector2D(600, 600), Vector2D(2,0), 200, 2, "projectile");
-	assets->CreateProjectile(Vector2D(600, 620), Vector2D(2,0), 200, 2, "projectile");
-	assets->CreateProjectile(Vector2D(400, 600), Vector2D(2,1), 200, 2, "projectile");
-	assets->CreateProjectile(Vector2D(600, 600), Vector2D(2,-1), 200, 2, "projectile");
-
-
 }
+
 
 auto& tiles(manager.getGroup(Game::groupMap));
 auto& players(manager.getGroup(Game::groupPlayers));
@@ -105,10 +109,14 @@ void Game::handleEvents() {
 	}
 }
 
+
+
 void Game::update() {
 
 	SDL_Rect playerCol = player.getComponent<ColliderComponent>().collider;
 	Vector2D playerPos = player.getComponent<TransformComponent>().position;
+
+	std::cout << playerPos.x<<"      "<<playerPos.y << std::endl;
 
 	std::stringstream ss;
 	ss << "Player position: " << playerPos;
@@ -127,12 +135,12 @@ void Game::update() {
 	for (auto& p : projectiles) {
 		if (Collision::AABB(player.getComponent<ColliderComponent>().collider, p->getComponent<ColliderComponent>().collider)) {
 			std::cout << "Hit player" << std::endl;
-			p->destroy();
+			//p->destroy();
 		}
 	}
 
-	camera.x = player.getComponent<TransformComponent>().position.x - 400;
-	camera.y = player.getComponent<TransformComponent>().position.y - 320;
+	camera.x = player.getComponent<TransformComponent>().position.x - 350;
+	camera.y = player.getComponent<TransformComponent>().position.y - 250;
 
 	if (camera.x < 0) {
 		camera.x = 0;
@@ -147,20 +155,50 @@ void Game::update() {
 		camera.y = camera.h;
 	}
 
+
+	pozx = playerPos.x;
+	pozy = playerPos.y;
+}
+
+void Game::spawnProjectile() {
+	switch (direction){
+	case 0:
+		Game::assets->CreateProjectile(Vector2D(pozx + 120, pozy + 95), Vector2D(2, 0), 200, 2, "projectileR",true);
+		break;
+	case 1:
+		Game::assets->CreateProjectile(Vector2D(pozx - 20, pozy + 95), Vector2D(-2, 0), 200, 2, "projectileL",true);
+		break;
+	case 2:
+		Game::assets->CreateProjectile(Vector2D(pozx + 95, pozy - 10), Vector2D(0, -2), 200, 2, "projectileU",false);
+		break;
+	case 3:
+		Game::assets->CreateProjectile(Vector2D(pozx + 26, pozy + 120), Vector2D(0, 2), 200, 2, "projectileD", false);
+		break;
+	default:
+		break;
+	}
+}
+
+void Game::directionChange(int newDirection) {
+	//0=right 1=left 2=up 3=down
+
+	direction = newDirection;
+
 }
 
 
 void Game::render()
 {
+	
 	SDL_RenderClear(renderer);
 	for (auto& t : tiles) {
 		t->draw();
 	}
-	/*
+	
 	for (auto& c : colliders) {
 		c->draw();
 	}
-	*/
+	
 	for (auto& t : players) {
 		t->draw();
 	}

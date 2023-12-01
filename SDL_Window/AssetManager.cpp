@@ -11,10 +11,16 @@ AssetManager::~AssetManager() {
 
 }
 
-void AssetManager::CreateProjectile(Vector2D pos, Vector2D vel, int range, int speed, std::string id)
+void AssetManager::CreateProjectile(Vector2D pos, Vector2D vel, int range, int speed, std::string id, bool LR)
 {
 	auto& projectile(manager->addEntity());
-	projectile.addComponent<TransformComponent>(pos.x, pos.y, 32,32,1);
+
+	if (LR) {
+		projectile.addComponent<TransformComponent>(pos.x, pos.y, 8, 20, 1);
+	}
+	else {
+		projectile.addComponent<TransformComponent>(pos.x, pos.y, 20, 8, 1);
+	}
 	projectile.addComponent<SpriteComponent>(id, false);
 	projectile.addComponent<ProjectileComponent>(range, speed, vel);
 	projectile.addComponent<ColliderComponent>("projectile");
