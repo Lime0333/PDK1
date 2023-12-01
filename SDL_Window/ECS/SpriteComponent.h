@@ -42,6 +42,9 @@ public:
 		Animation idleDOWN = Animation(4, 1, 100);
 		Animation walkDOWN = Animation(5, 2, 250);
 
+		Animation idleL = Animation(6, 1, 100);
+		Animation walkL = Animation(7, 2, 250);
+
 		animations.emplace("Idle", idle);
 		animations.emplace("Walk", walk);
 
@@ -50,6 +53,9 @@ public:
 
 		animations.emplace("IdleDOWN", idleDOWN);
 		animations.emplace("WalkDOWN", walkDOWN);
+
+		animations.emplace("IdleL", idleL);
+		animations.emplace("WalkL", walkL);
 
 
 		Play("Idle");

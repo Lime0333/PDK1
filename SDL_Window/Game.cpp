@@ -166,7 +166,7 @@ void Game::spawnProjectile() {
 		Game::assets->CreateProjectile(Vector2D(pozx + 120, pozy + 95), Vector2D(2, 0), 200, 2, "projectileR",true);
 		break;
 	case 1:
-		Game::assets->CreateProjectile(Vector2D(pozx - 20, pozy + 95), Vector2D(-2, 0), 200, 2, "projectileL",true);
+		Game::assets->CreateProjectile(Vector2D(pozx - 15, pozy + 26), Vector2D(-2, 0), 200, 2, "projectileL",true);
 		break;
 	case 2:
 		Game::assets->CreateProjectile(Vector2D(pozx + 95, pozy - 10), Vector2D(0, -2), 200, 2, "projectileU",false);

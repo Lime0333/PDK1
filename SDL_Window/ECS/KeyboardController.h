@@ -11,6 +11,7 @@ public:
 	TransformComponent* transform;
 	SpriteComponent* sprite;
 	
+	bool walking=false;
 	
 
 	void init() override {
@@ -26,13 +27,15 @@ public:
 				sprite->Play("WalkUP");
 				sprite->spriteFlip = SDL_FLIP_NONE;
 				Game::directionChange(2);
+				walking = true;
 				break;
 
 			case SDLK_a:
 				transform->velocity.x = -1;
-				sprite->Play("Walk");
-				sprite->spriteFlip = SDL_FLIP_HORIZONTAL;
+				sprite->Play("WalkL");
+				sprite->spriteFlip = SDL_FLIP_NONE;
 				Game::directionChange(1);
+				walking = true;
 				break;
 
 			case SDLK_d:
@@ -40,6 +43,7 @@ public:
 				sprite->Play("Walk");
 				sprite->spriteFlip = SDL_FLIP_NONE;
 				Game::directionChange(0);
+				walking = true;
 				break;
 
 			case SDLK_s:
@@ -47,11 +51,13 @@ public:
 				sprite->Play("WalkDOWN");
 				sprite->spriteFlip = SDL_FLIP_HORIZONTAL;
 				Game::directionChange(3);
+				walking = true;
 				break;
 
 			case SDLK_LSHIFT:
-				Game::spawnProjectile();
-
+				if (walking == false) {
+					Game::spawnProjectile();
+				}
 			default:
 
 				break;
@@ -63,22 +69,25 @@ public:
 			case SDLK_w:
 				transform->velocity.y = 0;
 				sprite->Play("IdleUP");
+				walking = false;
 				break;
 
 			case SDLK_a:
 				transform->velocity.x = 0;
-				sprite->Play("Idle");
-				
+				sprite->Play("IdleL");
+				walking = false;
 				break;
 
 			case SDLK_d:
 				transform->velocity.x = 0;
 				sprite->Play("Idle");
+				walking = false;
 				break;
 
 			case SDLK_s:
 				transform->velocity.y = 0;
 				sprite->Play("IdleDOWN");
+				walking = false;
 				break;
 
 			case SDLK_ESCAPE:
