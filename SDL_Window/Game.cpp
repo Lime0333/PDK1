@@ -24,8 +24,9 @@ bool Game::isRunning = false;
 auto& player(manager.addEntity());
 auto& label(manager.addEntity());
 
-int pozx,pozy,direction=0;
-//0=right 1=left 2=up 3=down
+int Game::kierunek = 0;
+int pozx,pozy;
+//0=right 1=left 2=up 3=down 4=right-up 5=right-down 6=left-up 7=left-down
 
 Game::Game()
 {}
@@ -116,7 +117,7 @@ void Game::update() {
 	SDL_Rect playerCol = player.getComponent<ColliderComponent>().collider;
 	Vector2D playerPos = player.getComponent<TransformComponent>().position;
 
-	std::cout << playerPos.x<<"      "<<playerPos.y << std::endl;
+	//std::cout << playerPos.x<<"      "<<playerPos.y << std::endl;
 
 	std::stringstream ss;
 	ss << "Player position: " << playerPos;
@@ -161,7 +162,9 @@ void Game::update() {
 }
 
 void Game::spawnProjectile() {
-	switch (direction){
+
+	//0=right 1=left 2=up 3=down 4=right-up 5=right-down 6=left-up 7=left-down
+	switch (kierunek){
 	case 0:
 		Game::assets->CreateProjectile(Vector2D(pozx + 120, pozy + 95), Vector2D(2, 0), 200, 2, "projectileR",true);
 		break;
@@ -174,16 +177,21 @@ void Game::spawnProjectile() {
 	case 3:
 		Game::assets->CreateProjectile(Vector2D(pozx + 26, pozy + 120), Vector2D(0, 2), 200, 2, "projectileD", false);
 		break;
+	case 4:
+		Game::assets->CreateProjectile(Vector2D(pozx + 120, pozy + 95), Vector2D(2, -2), 200, 2, "projectileR", true);
+		break;
+	case 5:
+		Game::assets->CreateProjectile(Vector2D(pozx + 120, pozy + 95), Vector2D(2, 2), 200, 2, "projectileR", true);
+		break;
+	case 6:
+		Game::assets->CreateProjectile(Vector2D(pozx - 15, pozy + 26), Vector2D(-2, -2), 200, 2, "projectileL", true);
+		break;
+	case 7:
+		Game::assets->CreateProjectile(Vector2D(pozx - 15, pozy + 26), Vector2D(-2, 2), 200, 2, "projectileL", true);
+		break;
 	default:
 		break;
 	}
-}
-
-void Game::directionChange(int newDirection) {
-	//0=right 1=left 2=up 3=down
-
-	direction = newDirection;
-
 }
 
 

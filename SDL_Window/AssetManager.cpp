@@ -1,7 +1,7 @@
 #include"AssetManager.h"
 #include"ECS/Components.h"
 
-
+int kierunek = 0;
 
 AssetManager::AssetManager(Manager* man) : manager(man){
 

@@ -23,7 +23,6 @@ public:
 	void init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen);
 	
 	static void spawnProjectile();
-	static void directionChange(int newDirection);
 
 	void handleEvents();
 	void update();
@@ -38,6 +37,7 @@ public:
 	static bool isRunning;
 	static SDL_Rect camera;
 	static AssetManager *assets;
+	static int kierunek;
 
 	enum groupLabels : std::size_t {
 		groupMap,
