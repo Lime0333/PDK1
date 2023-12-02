@@ -6,7 +6,10 @@
 #include"Vector2D.h"
 #include"Collision.h"
 #include"AssetManager.h"
+
+
 #include<sstream>
+
 
 Map* map;
 Manager manager;
@@ -29,11 +32,12 @@ auto& label(manager.addEntity());
 int Game::kierunek = 0;
 int pozx,pozy;
 int Game::HP = 100;
+int Game::cooldown = 5;
 
 const int Game::MAXammo = 5;
 int Game::ammo = Game::MAXammo;
 char ammoString[Game::MAXammo];
-
+int cooldownVLC;
 
 Game::Game()
 {}
@@ -43,6 +47,11 @@ Game::~Game()
 
 void Game::init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
 {
+
+	//system("moai.bat");
+	system("init.bat");
+	system("KillVLC.bat");
+
 	for (int i=0; i < MAXammo; i++) {
 		ammoString[i] = char(177);
 	}
@@ -109,7 +118,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	SDL_Color HP_red = { 220,20,60,150 };
 	SDL_Color darkGreyGreen = { 91, 101, 51,150 };
 
-	label.addComponent<UILabel>(500, 10, ammoString, "comic", darkGreyGreen);
+	
 	label.addComponent<UILabel>(10, 10, "Test String", "goudysto", HP_red);
 
 }
@@ -138,6 +147,17 @@ void Game::handleEvents() {
 
 void Game::update() {
 
+	if (cooldown > 0) {
+		cooldown--;
+	}
+	//std::cout << cooldown << std::endl;
+
+	if (cooldownVLC > 1000) {
+		system("KillVLC.bat");
+		cooldownVLC = 0;
+	}
+	cooldownVLC++;
+
 	{
 
 		int p = ammo;
@@ -149,11 +169,12 @@ void Game::update() {
 			else {
 				ammoString[i] = ' ';
 			}
+			
 		}
-		label.getComponent<UILabel>().SetLabelText(ammoString, "comic");
+		
 	}
 
-	std::cout << ammo << std::endl;
+	//std::cout << ammo << std::endl;
 
 	SDL_Rect playerCol = player.getComponent<ColliderComponent>().collider;
 	Vector2D playerPos = player.getComponent<TransformComponent>().position;
@@ -161,9 +182,9 @@ void Game::update() {
 	//std::cout << playerPos.x<<"      "<<playerPos.y << std::endl;
 
 	std::stringstream ss;
-	ss << "HP:  " << HP << '%';
+	ss << "HP:  " << HP << '%'<<"                             "<< ammoString;
 	label.getComponent<UILabel>().SetLabelText(ss.str(), "goudysto");
-
+	
 	manager.refresh();
 	manager.update();
 
@@ -204,37 +225,50 @@ void Game::update() {
 
 void Game::spawnProjectile() {
 
-	//0=right 1=left 2=up 3=down 4=right-up 5=right-down 6=left-up 7=left-down
-	switch (kierunek){
-	case 0:
-		Game::assets->CreateProjectile(Vector2D(pozx + 120, pozy + 95), Vector2D(2, 0), 200, 2, "projectileR",true);
-		break;
-	case 1:
-		Game::assets->CreateProjectile(Vector2D(pozx - 15, pozy + 26), Vector2D(-2, 0), 200, 2, "projectileL",true);
-		break;
-	case 2:
-		Game::assets->CreateProjectile(Vector2D(pozx + 95, pozy - 10), Vector2D(0, -2), 200, 2, "projectileU",false);
-		break;
-	case 3:
-		Game::assets->CreateProjectile(Vector2D(pozx + 26, pozy + 120), Vector2D(0, 2), 200, 2, "projectileD", false);
-		break;
-	case 4:
-		Game::assets->CreateProjectile(Vector2D(pozx + 120, pozy + 95), Vector2D(2, -2), 200, 2, "projectileR", true);
-		break;
-	case 5:
-		Game::assets->CreateProjectile(Vector2D(pozx + 120, pozy + 95), Vector2D(2, 2), 200, 2, "projectileR", true);
-		break;
-	case 6:
-		Game::assets->CreateProjectile(Vector2D(pozx - 15, pozy + 26), Vector2D(-2, -2), 200, 2, "projectileL", true);
-		break;
-	case 7:
-		Game::assets->CreateProjectile(Vector2D(pozx - 15, pozy + 26), Vector2D(-2, 2), 200, 2, "projectileL", true);
-		break;
-	default:
-		break;
-	}
+	if(cooldown<=0 and ammo>0){
 
-	ammo--;
+		
+		
+		ammo--;
+
+		cooldown = 20;
+
+		//0=right 1=left 2=up 3=down 4=right-up 5=right-down 6=left-up 7=left-down
+		switch (kierunek) {
+
+		case 0:
+			Game::assets->CreateProjectile(Vector2D(pozx + 120, pozy + 95), Vector2D(2, 0), 200, 2, "projectileR", true);
+			break;
+		case 1:
+			Game::assets->CreateProjectile(Vector2D(pozx - 15, pozy + 26), Vector2D(-2, 0), 200, 2, "projectileL", true);
+			break;
+		case 2:
+			Game::assets->CreateProjectile(Vector2D(pozx + 95, pozy - 10), Vector2D(0, -2), 200, 2, "projectileU", false);
+			break;
+		case 3:
+			Game::assets->CreateProjectile(Vector2D(pozx + 26, pozy + 120), Vector2D(0, 2), 200, 2, "projectileD", false);
+			break;
+		case 4:
+			Game::assets->CreateProjectile(Vector2D(pozx + 120, pozy + 95), Vector2D(2, -2), 200, 2, "projectileR", true);
+			break;
+		case 5:
+			Game::assets->CreateProjectile(Vector2D(pozx + 120, pozy + 95), Vector2D(2, 2), 200, 2, "projectileR", true);
+			break;
+		case 6:
+			Game::assets->CreateProjectile(Vector2D(pozx - 15, pozy + 26), Vector2D(-2, -2), 200, 2, "projectileL", true);
+			break;
+		case 7:
+			Game::assets->CreateProjectile(Vector2D(pozx - 15, pozy + 26), Vector2D(-2, 2), 200, 2, "projectileL", true);
+			break;
+		default:
+			break;
+		}
+		system("gunShot.bat");
+	}
+	else if(ammo<=0) {
+		system("noAmmo.bat");
+	}
+	
 }
 
 
@@ -263,6 +297,7 @@ void Game::render()
 	for (auto& p : projectiles) {
 		p->draw();
 	}
+	
 
 	label.draw();
 

@@ -37,6 +37,7 @@ public:
 	static SDL_Rect camera;
 	static AssetManager *assets;
 
+	static int cooldown;
 	static int kierunek;
 	static int HP;
 	static int ammo;

@@ -58,6 +58,13 @@ public:
 				}
 				Game::spawnProjectile();
 				shootin = true;
+				break;
+
+			case SDLK_r:
+				system("reload.bat");
+				Game::cooldown = 100;
+				Game::ammo = 5;
+				break;
 			default:
 
 				break;
