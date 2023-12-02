@@ -72,8 +72,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\dev\SDL2_image\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\dev\SDL2_image\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\\x64\\Debug\\SDL2_image\\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\\x64\\Debug\\SDL2_image\\lib\\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -115,14 +115,17 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>X:\dev\SDL2_TTF\include;C:\dev\SDL2_image\include;C:\dev\SDL2\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\\x64\\Debug\\SDL2_TTF\\include;$(SolutionDir)\\x64\\Debug\\SDL2_image\\include;$(SolutionDir)\\x64\\Debug\\SDL2\\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>X:\dev\SDL2_TTF\lib\x64;C:\dev\SDL2_image\lib\x64;C:\dev\SDL2\lib\x64</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\\x64\\Debug\\SDL2_TTF\\lib\\x64;$(SolutionDir)\\x64\\Debug\\SDL2_image\\lib\\x64;$(SolutionDir)\\x64\\Debug\\SDL2\\lib\\x64</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2_ttf.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;Shell32.lib</AdditionalDependencies>
     </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
