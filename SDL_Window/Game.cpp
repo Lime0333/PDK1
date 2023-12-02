@@ -22,11 +22,18 @@ AssetManager* Game::assets = new AssetManager(&manager);
 bool Game::isRunning = false;
 
 auto& player(manager.addEntity());
+auto& enemy(manager.addEntity());
 auto& label(manager.addEntity());
 
+//0=right 1=left 2=up 3=down 4=right-up 5=right-down 6=left-up 7=left-down
 int Game::kierunek = 0;
 int pozx,pozy;
-//0=right 1=left 2=up 3=down 4=right-up 5=right-down 6=left-up 7=left-down
+int Game::HP = 100;
+
+const int Game::MAXammo = 5;
+int Game::ammo = Game::MAXammo;
+char ammoString[Game::MAXammo];
+
 
 Game::Game()
 {}
@@ -36,6 +43,9 @@ Game::~Game()
 
 void Game::init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
 {
+	for (int i=0; i < MAXammo; i++) {
+		ammoString[i] = char(177);
+	}
 
 	int flags = 0;
 	if (fullscreen) {
@@ -66,14 +76,17 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 	assets->AddTexture("terrain", "assets/bg/terrain_ss.png");
 	assets->AddTexture("player", "assets/characters/ch1/ch1,2.png");
-	assets->AddTexture("playerUP", "assets/characters/ch1/ch1UP.png");
+	assets->AddTexture("enemy", "assets/characters/e1/eg1.png");
+
 
 	assets->AddTexture("projectileR", "assets/bullet/bulletR.png");
 	assets->AddTexture("projectileL", "assets/bullet/bulletL.png");
 	assets->AddTexture("projectileU", "assets/bullet/bulletU.png");
 	assets->AddTexture("projectileD", "assets/bullet/bulletD.png");
 
-	assets->AddFont("comic", "assets/comic.ttf", 16);
+	assets->AddFont("goudysto", "assets/GOUDYSTO.TTF", 30);
+	assets->AddFont("comic", "assets/comic.ttf", 30);
+	
 
 	map = new Map("terrain", 3, 32);
 
@@ -86,9 +99,18 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	player.addComponent<ColliderComponent>("player");
 	player.addGroup(groupPlayers);
 
-	SDL_Color white = { 255,255,255,255 };
+	enemy.addComponent<TransformComponent>(900.0f, 640.0f, 32, 32, 4);
+	enemy.addComponent<SpriteComponent>("enemy", true);
+	//enemy.addComponent<KeyboardController>();
+	enemy.addComponent<ColliderComponent>("enemy");
+	enemy.addGroup(groupPlayers);
 
-	label.addComponent<UILabel>(10, 10, "Test String", "comic", white);
+	SDL_Color white = { 255,255,255,255 };
+	SDL_Color HP_red = { 220,20,60,150 };
+	SDL_Color darkGreyGreen = { 91, 101, 51,150 };
+
+	label.addComponent<UILabel>(500, 10, ammoString, "comic", darkGreyGreen);
+	label.addComponent<UILabel>(10, 10, "Test String", "goudysto", HP_red);
 
 }
 
@@ -97,6 +119,8 @@ auto& tiles(manager.getGroup(Game::groupMap));
 auto& players(manager.getGroup(Game::groupPlayers));
 auto& colliders(manager.getGroup(Game::groupColliders));
 auto& projectiles(manager.getGroup(Game::groupProjectiles));
+
+auto& enemies(manager.getGroup(Game::groupEnemies));
 
 void Game::handleEvents() {
 
@@ -114,14 +138,31 @@ void Game::handleEvents() {
 
 void Game::update() {
 
+	{
+
+		int p = ammo;
+		for (int i = 0; i < MAXammo; i++) {
+			if (p > 0) {
+				p--;
+				ammoString[i] = char(177);
+			}
+			else {
+				ammoString[i] = ' ';
+			}
+		}
+		label.getComponent<UILabel>().SetLabelText(ammoString, "comic");
+	}
+
+	std::cout << ammo << std::endl;
+
 	SDL_Rect playerCol = player.getComponent<ColliderComponent>().collider;
 	Vector2D playerPos = player.getComponent<TransformComponent>().position;
 
 	//std::cout << playerPos.x<<"      "<<playerPos.y << std::endl;
 
 	std::stringstream ss;
-	ss << "Player position: " << playerPos;
-	label.getComponent<UILabel>().SetLabelText(ss.str(), "comic");
+	ss << "HP:  " << HP << '%';
+	label.getComponent<UILabel>().SetLabelText(ss.str(), "goudysto");
 
 	manager.refresh();
 	manager.update();
@@ -192,6 +233,8 @@ void Game::spawnProjectile() {
 	default:
 		break;
 	}
+
+	ammo--;
 }
 
 
@@ -209,6 +252,10 @@ void Game::render()
 	
 	for (auto& t : players) {
 		t->draw();
+	}
+
+	for (auto& e : enemies) {
+		e->draw();
 	}
 
 	//enemies usuniete

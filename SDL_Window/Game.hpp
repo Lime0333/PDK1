@@ -3,7 +3,6 @@
 
 #include"SDL.h"
 #include"SDL_image.h"
-//#include"AssetManager.h"
 
 #include<iostream>
 #include<vector>
@@ -37,11 +36,18 @@ public:
 	static bool isRunning;
 	static SDL_Rect camera;
 	static AssetManager *assets;
+
 	static int kierunek;
+	static int HP;
+	static int ammo;
+	static const int MAXammo;
 
 	enum groupLabels : std::size_t {
 		groupMap,
 		groupPlayers,
+
+		groupEnemies,
+		
 		groupColliders,
 		groupProjectiles
 	};
