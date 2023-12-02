@@ -49,8 +49,9 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 {
 
 	//system("moai.bat");
-	system("init.bat");
+	
 	system("KillVLC.bat");
+	system("init.bat");
 
 	for (int i=0; i < MAXammo; i++) {
 		ammoString[i] = char(177);

@@ -175,12 +175,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="gunShot.bat" />
+    <None Include="init.bat" />
     <None Include="KillVLC.bat" />
     <None Include="moai.bat" />
     <None Include="noAmmo.bat" />
     <None Include="reload.bat" />
   </ItemGroup>
   <ItemGroup>
+    <Media Include="..\..\..\..\Downloads\moai.mp4" />
     <Media Include="assets\sounds\moai.mp3">
       <DeploymentContent>true</DeploymentContent>
     </Media>

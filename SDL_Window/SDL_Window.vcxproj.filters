@@ -112,8 +112,12 @@
     <None Include="noAmmo.bat">
       <Filter>Pliki źródłowe</Filter>
     </None>
+    <None Include="init.bat">
+      <Filter>Pliki źródłowe</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Media Include="assets\sounds\moai.mp3" />
+    <Media Include="..\..\..\..\Downloads\moai.mp4" />
   </ItemGroup>
 </Project>

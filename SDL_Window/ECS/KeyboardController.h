@@ -10,7 +10,6 @@ public:
 	TransformComponent* transform;
 	SpriteComponent* sprite;
 	
-	bool shootin=false;
 	int aniUD = 0,aniLR=0;
 	
 	
@@ -25,46 +24,24 @@ public:
 			switch (Game::event.key.keysym.sym) {
 			case SDLK_w:
 				transform->velocity.y = -1;
-
 				aniUD = 1;
-				
 				break;
 
 			case SDLK_a:
 				transform->velocity.x = -1;
-				
 				aniLR = 1;
-				
 				break;
 
 			case SDLK_d:
 				transform->velocity.x = 1;
-				
 				aniLR = 2;
-				
 				break;
 
 			case SDLK_s:
 				transform->velocity.y = 1;
-
 				aniUD = 2;
-				
 				break;
 
-			case SDLK_LSHIFT:
-				if (aniUD==0 and aniLR==0) {
-					Game::spawnProjectile();
-					
-				}
-				Game::spawnProjectile();
-				shootin = true;
-				break;
-
-			case SDLK_r:
-				system("reload.bat");
-				Game::cooldown = 100;
-				Game::ammo = 5;
-				break;
 			default:
 
 				break;
@@ -109,17 +86,23 @@ public:
 			case SDLK_s:
 				transform->velocity.y = 0;
 				sprite->Play("IdleDOWN");
-				
-
 				if (aniUD == 2) {
 					aniUD = 0;
 				}
-
 				break;
 
 			case SDLK_LSHIFT:
-				shootin = false;
-
+				Game::spawnProjectile();
+				break;
+			case SDLK_r:
+				if(Game::ammo<Game::MAXammo){
+					system("reload.bat");
+					Game::cooldown = 100;
+					Game::ammo = 5;
+				}
+				break;
+			case SDLK_m:
+				system("moai.bat");
 			case SDLK_ESCAPE:
 				//Game::isRunning = false;
 			default:
