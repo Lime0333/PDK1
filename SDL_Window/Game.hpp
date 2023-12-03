@@ -41,19 +41,33 @@ public:
 	static int cooldown;
 	static int kierunek;
 	static int HP;
-	static int eHP;
+	
 	static int ammo;
 	static const int MAXammo;
-	static int ePosX;
-	static int ePosY;
+	
+	static int ePosX1;
+	static int ePosX2;
+	static int ePosX3;
+
+	static int ePosY1;
+	static int ePosY2;
+	static int ePosY3;
+
+	static int eHP1;
+	static int eHP2;
+	static int eHP3;
+
 	static int pPosX;
 	static int pPosY;
+
 
 	enum groupLabels : std::size_t {
 		groupMap,
 		groupPlayers,
 
-		groupEnemies,
+		groupEnemies1,
+		groupEnemies2,
+		groupEnemies3,
 		
 		groupColliders,
 		groupProjectiles

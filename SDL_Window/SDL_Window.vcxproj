@@ -150,6 +150,7 @@
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="ECS\ECS.cpp" />
+    <ClCompile Include="ECS\Enemies\EnemiesComponent.h" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="main.cpp" />
@@ -164,7 +165,11 @@
     <ClInclude Include="ECS\ColliderComponent.h" />
     <ClInclude Include="ECS\Components.h" />
     <ClInclude Include="ECS\ECS.h" />
-    <ClInclude Include="ECS\EnemyMovement.h" />
+    <ClInclude Include="ECS\Enemies\E1.h" />
+    <ClInclude Include="ECS\Enemies\E2.h" />
+    <ClInclude Include="ECS\Enemies\E3.h" />
+    <ClInclude Include="ECS\Enemies\E4.h" />
+    <ClInclude Include="ECS\Enemies\E5.h" />
     <ClInclude Include="ECS\KeyboardController.h" />
     <ClInclude Include="ECS\ProjectileComponent.h" />
     <ClInclude Include="ECS\TileComponent.h" />
@@ -178,13 +183,13 @@
     <ClInclude Include="Vector2D.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="gunShot.bat" />
-    <None Include="init.bat" />
-    <None Include="KillVLC.bat" />
-    <None Include="moai.bat" />
-    <None Include="noAmmo.bat" />
-    <None Include="reload.bat" />
-    <None Include="wait1.bat" />
+    <None Include="BAT\gunShot.bat" />
+    <None Include="BAT\init.bat" />
+    <None Include="BAT\KillVLC.bat" />
+    <None Include="BAT\moai.bat" />
+    <None Include="BAT\noAmmo.bat" />
+    <None Include="BAT\reload.bat" />
+    <None Include="BAT\wait1.bat" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="assets\sounds\moai.mp3">

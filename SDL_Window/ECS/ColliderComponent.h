@@ -3,7 +3,7 @@
 #include<string>
 #include"SDL.h"
 #include"Components.h"
-#include"TextureManager.h"
+#include"../TextureManager.h"
 
 class ColliderComponent :public Component {
 public:

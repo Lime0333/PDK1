@@ -98,13 +98,13 @@ public:
 				break;
 			case SDLK_r:
 				if(Game::ammo<Game::MAXammo){
-					system("reload.bat");
+					system("BAT\\reload.bat");
 					Game::cooldown = 100;
 					Game::ammo = 5;
 				}
 				break;
 			case SDLK_m:
-				system("moai.bat");
+				system("BAT\\moai.bat");
 			case SDLK_ESCAPE:
 				//Game::isRunning = false;
 			default:

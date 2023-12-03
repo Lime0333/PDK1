@@ -42,6 +42,9 @@
     <ClCompile Include="AssetManager.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="ECS\Enemies\EnemiesComponent.h">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.hpp">
@@ -95,30 +98,42 @@
     <ClInclude Include="ECS\UILabel.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="ECS\EnemyMovement.h">
+    <ClInclude Include="ECS\Enemies\E1.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Enemies\E2.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Enemies\E3.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Enemies\E4.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Enemies\E5.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="moai.bat">
+    <None Include="BAT\moai.bat">
       <Filter>Pliki źródłowe</Filter>
     </None>
-    <None Include="gunShot.bat">
+    <None Include="BAT\gunShot.bat">
       <Filter>Pliki źródłowe</Filter>
     </None>
-    <None Include="reload.bat">
+    <None Include="BAT\reload.bat">
       <Filter>Pliki źródłowe</Filter>
     </None>
-    <None Include="KillVLC.bat">
+    <None Include="BAT\KillVLC.bat">
       <Filter>Pliki źródłowe</Filter>
     </None>
-    <None Include="noAmmo.bat">
+    <None Include="BAT\noAmmo.bat">
       <Filter>Pliki źródłowe</Filter>
     </None>
-    <None Include="init.bat">
+    <None Include="BAT\init.bat">
       <Filter>Pliki źródłowe</Filter>
     </None>
-    <None Include="wait1.bat">
+    <None Include="BAT\wait1.bat">
       <Filter>Pliki źródłowe</Filter>
     </None>
   </ItemGroup>

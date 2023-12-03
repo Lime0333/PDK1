@@ -32,14 +32,37 @@ public:
 			entity->destroy();
 		}
 
-		else if (transform->position.x < Game::ePosX + 110 and
-				transform->position.x > Game::ePosX and
-				transform->position.y < Game::ePosY + 110 and
-				transform->position.y > Game::ePosY
-			) {
-			entity->destroy();
-			Game::eHP = Game::eHP - 20;
-			std::cout << "Enemy hit! HP: " << Game::eHP << std::endl;
+		else{
+			if (transform->position.x < Game::ePosX1 + 110 and
+				transform->position.x > Game::ePosX1 and
+				transform->position.y < Game::ePosY1 + 110 and
+				transform->position.y > Game::ePosY1
+				) {
+				entity->destroy();
+				Game::eHP1 = Game::eHP1 - 20;
+				std::cout << "Enemy 1 hit! HP: " << Game::eHP1 << std::endl;
+			}
+
+			if (transform->position.x < Game::ePosX2 + 110 and
+				transform->position.x > Game::ePosX2 and
+				transform->position.y < Game::ePosY2 + 110 and
+				transform->position.y > Game::ePosY2
+				) {
+				entity->destroy();
+				Game::eHP2 = Game::eHP2 - 20;
+				std::cout << "Enemy 2 hit! HP: " << Game::eHP2 << std::endl;
+			}
+
+			if (transform->position.x < Game::ePosX3 + 1100 and
+				transform->position.x > Game::ePosX3 and
+				transform->position.y < Game::ePosY3 + 110 and
+				transform->position.y > Game::ePosY3
+				) {
+				entity->destroy();
+				Game::eHP3 = Game::eHP3 - 20;
+				std::cout << "Enemy 3 hit! HP: " << Game::eHP3 << std::endl;
+			}
+
 		}
 	}
 

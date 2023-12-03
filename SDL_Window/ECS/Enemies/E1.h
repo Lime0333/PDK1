@@ -1,12 +1,12 @@
 #pragma once
 
 
-#include"../Game.hpp"
-#include"ECS.h"
-#include"Components.h"
-#include"../AssetManager.h"
+#include"../../Game.hpp"
+#include"../ECS.h"
+#include"../Components.h"
+#include"../../AssetManager.h"
 
-class EnemyMovement :public Component {
+class E1 :public Component {
 public:
 	TransformComponent* transform;
 	SpriteComponent* sprite;
@@ -21,7 +21,7 @@ public:
 	}
 
 	void update() override {
-		if (Game::eHP <= 0 and alive) {
+		if (Game::eHP1 <= 0 and alive) {
 			for (float i = 30; i > 0; i=i-10) {
 				transform->velocity.y = i;
 			}
@@ -34,13 +34,13 @@ public:
 				
 				//transform->velocity.y = -1;
 
-				std::cout << Game::ePosX <<"   " << Game::ePosY << std::endl;
+				//std::cout << Game::ePosX <<"   " << Game::ePosY << std::endl;
 
-				if (Game::ePosX > Game::pPosX+10) {
+				if (Game::ePosX1 > Game::pPosX+10) {
 					transform->velocity.x = -0.5;
 					aniLR = 1;
 				}
-				else if (Game::ePosX < Game::pPosX - 10) {
+				else if (Game::ePosX1 < Game::pPosX - 10) {
 					transform->velocity.x = 0.5;
 					aniLR = 2;
 				}
@@ -50,11 +50,11 @@ public:
 					aniLR = 0;
 					sprite->Play("Idle");
 				}
-				if (Game::ePosY > Game::pPosY + 10) {
+				if (Game::ePosY1 > Game::pPosY + 10) {
 					transform->velocity.y = -0.5;
 					aniUD = 1;
 				}
-				else if (Game::ePosY < Game::pPosY - 10) {
+				else if (Game::ePosY1 < Game::pPosY - 10) {
 					transform->velocity.y = 0.5;
 					aniUD = 2;
 				}
