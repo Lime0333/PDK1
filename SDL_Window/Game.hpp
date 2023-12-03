@@ -42,6 +42,10 @@ public:
 	static int HP;
 	static int ammo;
 	static const int MAXammo;
+	static int ePosX;
+	static int ePosY;
+	static int pPosX;
+	static int pPosY;
 
 	enum groupLabels : std::size_t {
 		groupMap,

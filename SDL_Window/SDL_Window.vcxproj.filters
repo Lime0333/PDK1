@@ -95,6 +95,9 @@
     <ClInclude Include="ECS\UILabel.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
+    <ClInclude Include="ECS\EnemyMovement.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="moai.bat">

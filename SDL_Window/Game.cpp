@@ -30,9 +30,12 @@ auto& label(manager.addEntity());
 
 //0=right 1=left 2=up 3=down 4=right-up 5=right-down 6=left-up 7=left-down
 int Game::kierunek = 0;
-int pozx,pozy;
+int Game::pPosX; 
+int Game::pPosY;
 int Game::HP = 100;
 int Game::cooldown = 5;
+int Game::ePosX;
+int Game::ePosY;
 
 const int Game::MAXammo = 5;
 int Game::ammo = Game::MAXammo;
@@ -109,9 +112,10 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	player.addComponent<ColliderComponent>("player");
 	player.addGroup(groupPlayers);
 
+
 	enemy.addComponent<TransformComponent>(900.0f, 640.0f, 32, 32, 4);
 	enemy.addComponent<SpriteComponent>("enemy", true);
-	//enemy.addComponent<KeyboardController>();
+	enemy.addComponent<EnemyMovement>();
 	enemy.addComponent<ColliderComponent>("enemy");
 	enemy.addGroup(groupPlayers);
 
@@ -180,6 +184,15 @@ void Game::update() {
 	SDL_Rect playerCol = player.getComponent<ColliderComponent>().collider;
 	Vector2D playerPos = player.getComponent<TransformComponent>().position;
 
+	pPosX = playerPos.x;
+	pPosY = playerPos.y;
+
+	SDL_Rect enemyCol = enemy.getComponent<ColliderComponent>().collider;
+	Vector2D enemyPos = enemy.getComponent<TransformComponent>().position;
+
+	ePosX = enemyPos.x;
+	ePosY = enemyPos.y;
+
 	//std::cout << playerPos.x<<"      "<<playerPos.y << std::endl;
 
 	std::stringstream ss;
@@ -218,10 +231,6 @@ void Game::update() {
 	if (camera.y > camera.h) {
 		camera.y = camera.h;
 	}
-
-
-	pozx = playerPos.x;
-	pozy = playerPos.y;
 }
 
 void Game::spawnProjectile() {
@@ -238,28 +247,28 @@ void Game::spawnProjectile() {
 		switch (kierunek) {
 
 		case 0:
-			Game::assets->CreateProjectile(Vector2D(pozx + 120, pozy + 95), Vector2D(2, 0), 200, 2, "projectileR", true);
+			Game::assets->CreateProjectile(Vector2D(pPosX + 120, pPosY + 95), Vector2D(2, 0), 200, 2, "projectileR", true);
 			break;
 		case 1:
-			Game::assets->CreateProjectile(Vector2D(pozx - 15, pozy + 26), Vector2D(-2, 0), 200, 2, "projectileL", true);
+			Game::assets->CreateProjectile(Vector2D(pPosX - 15, pPosY + 26), Vector2D(-2, 0), 200, 2, "projectileL", true);
 			break;
 		case 2:
-			Game::assets->CreateProjectile(Vector2D(pozx + 95, pozy - 10), Vector2D(0, -2), 200, 2, "projectileU", false);
+			Game::assets->CreateProjectile(Vector2D(pPosX + 95, pPosY - 10), Vector2D(0, -2), 200, 2, "projectileU", false);
 			break;
 		case 3:
-			Game::assets->CreateProjectile(Vector2D(pozx + 26, pozy + 120), Vector2D(0, 2), 200, 2, "projectileD", false);
+			Game::assets->CreateProjectile(Vector2D(pPosX + 26, pPosY + 120), Vector2D(0, 2), 200, 2, "projectileD", false);
 			break;
 		case 4:
-			Game::assets->CreateProjectile(Vector2D(pozx + 120, pozy + 95), Vector2D(2, -2), 200, 2, "projectileR", true);
+			Game::assets->CreateProjectile(Vector2D(pPosX + 120, pPosY + 95), Vector2D(2, -2), 200, 2, "projectileR", true);
 			break;
 		case 5:
-			Game::assets->CreateProjectile(Vector2D(pozx + 120, pozy + 95), Vector2D(2, 2), 200, 2, "projectileR", true);
+			Game::assets->CreateProjectile(Vector2D(pPosX + 120, pPosY + 95), Vector2D(2, 2), 200, 2, "projectileR", true);
 			break;
 		case 6:
-			Game::assets->CreateProjectile(Vector2D(pozx - 15, pozy + 26), Vector2D(-2, -2), 200, 2, "projectileL", true);
+			Game::assets->CreateProjectile(Vector2D(pPosX - 15, pPosY + 26), Vector2D(-2, -2), 200, 2, "projectileL", true);
 			break;
 		case 7:
-			Game::assets->CreateProjectile(Vector2D(pozx - 15, pozy + 26), Vector2D(-2, 2), 200, 2, "projectileL", true);
+			Game::assets->CreateProjectile(Vector2D(pPosX - 15, pPosY + 26), Vector2D(-2, 2), 200, 2, "projectileL", true);
 			break;
 		default:
 			break;
