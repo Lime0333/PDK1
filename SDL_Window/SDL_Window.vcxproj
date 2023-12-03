@@ -190,6 +190,7 @@
     <None Include="BAT\noAmmo.bat" />
     <None Include="BAT\reload.bat" />
     <None Include="BAT\wait1.bat" />
+    <None Include="BAT\EDeath2.bat" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="assets\sounds\moai.mp3">

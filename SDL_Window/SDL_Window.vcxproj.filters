@@ -136,6 +136,9 @@
     <None Include="BAT\wait1.bat">
       <Filter>Pliki źródłowe</Filter>
     </None>
+    <None Include="BAT\EDeath2.bat">
+      <Filter>Pliki źródłowe</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Media Include="assets\sounds\moai.mp3" />

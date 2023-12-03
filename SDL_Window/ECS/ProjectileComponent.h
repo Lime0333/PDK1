@@ -4,6 +4,7 @@
 #include"Components.h"
 #include"../Vector2D.h"
 
+
 class ProjectileComponent : public Component {
 public:
 	//ProjectileComponent() : range(0), speed(0){}

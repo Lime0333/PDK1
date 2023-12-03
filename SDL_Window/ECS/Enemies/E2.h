@@ -1,19 +1,18 @@
 #pragma once
 
 
-#include"../../Game.hpp"
-#include"../ECS.h"
-#include"../Components.h"
-#include"../../AssetManager.h"
+
+#include"Emovement.h"
 
 class E2 :public Component {
 public:
 	TransformComponent* transform;
 	SpriteComponent* sprite;
 
-	int aniUD = 0, aniLR = 0;
+	int aniUD = 0, aniLR = 0,kierunek=0;
 	bool alive = true;
-
+	int PozX, PozY;
+	int Eid = 2;
 
 	void init() override {
 		transform = &entity->getComponent<TransformComponent>();
@@ -21,9 +20,14 @@ public:
 	}
 
 	void update() override {
+
+		PozX = Game::ePosX2;
+		PozY = Game::ePosY2;
+
 		if (Game::eHP2 <= 0 and alive) {
 			for (float i = 30; i > 0; i = i - 10) {
 				transform->velocity.y = i;
+				
 			}
 
 
@@ -32,15 +36,19 @@ public:
 
 		if (alive) {
 
+			Game::ESpawnP(Eid, kierunek);
+
 			//transform->velocity.y = -1;
 
 			//std::cout << Game::ePosX <<"   " << Game::ePosY << std::endl;
 
-			if (Game::ePosX2 > Game::pPosX + 10) {
+			//0=right 1=left 2=up 3=down 4=right-up 5=right-down 6=left-up 7=left-down
+
+			if (PozX > Game::pPosX + 10) {
 				transform->velocity.x = -0.5;
 				aniLR = 1;
 			}
-			else if (Game::ePosX2 < Game::pPosX - 10) {
+			else if (PozX < Game::pPosX - 10) {
 				transform->velocity.x = 0.5;
 				aniLR = 2;
 			}
@@ -50,11 +58,11 @@ public:
 				aniLR = 0;
 				sprite->Play("Idle");
 			}
-			if (Game::ePosY2 > Game::pPosY + 10) {
+			if (PozY > Game::pPosY + 10) {
 				transform->velocity.y = -0.5;
 				aniUD = 1;
 			}
-			else if (Game::ePosY2 < Game::pPosY - 10) {
+			else if (PozY < Game::pPosY - 10) {
 				transform->velocity.y = 0.5;
 				aniUD = 2;
 			}
@@ -72,42 +80,42 @@ public:
 				if (aniLR == 0) {
 					sprite->spriteFlip = SDL_FLIP_NONE;
 					sprite->Play("WalkUP");
-					//Game::kierunek = 2;
+					kierunek = 2;
 				}
 				else if (aniLR == 1) {
 					//UL anim
-					//Game::kierunek = 6;
+					kierunek = 6;
 				}
 				else if (aniLR == 2) {
 					//UR anim
-					//Game::kierunek = 4;
+					kierunek = 4;
 				}
 			}
 			else if (aniUD == 2) {
 				if (aniLR == 0) {
 					sprite->spriteFlip = SDL_FLIP_NONE;
 					sprite->Play("WalkDOWN");
-					//Game::kierunek = 3;
+					kierunek = 3;
 				}
 				else if (aniLR == 1) {
 					//DL anim
-					//Game::kierunek = 7;
+					kierunek = 7;
 				}
 				else if (aniLR == 2) {
 					//DR anim
-					//Game::kierunek = 5;
+					kierunek = 5;
 				}
 			}
 			else if (aniUD == 0) {
 				if (aniLR == 1) {
 					sprite->spriteFlip = SDL_FLIP_NONE;
 					sprite->Play("WalkL");
-					//Game::kierunek = 1;
+					kierunek = 1;
 				}
 				else if (aniLR == 2) {
 					sprite->spriteFlip = SDL_FLIP_NONE;
 					sprite->Play("Walk");
-					//Game::kierunek = 0;
+					kierunek = 0;
 				}
 				else if (aniLR == 0) {
 

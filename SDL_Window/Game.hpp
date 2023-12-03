@@ -22,7 +22,8 @@ public:
 	void init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen);
 	
 	static void spawnProjectile();
-	static void killEnemy();
+	static void ESpawnP(int Eid,int kierunek);
+	
 
 	void handleEvents();
 	void update();
@@ -48,14 +49,20 @@ public:
 	static int ePosX1;
 	static int ePosX2;
 	static int ePosX3;
+	static int ePosX4;
+	static int ePosX5;
 
 	static int ePosY1;
 	static int ePosY2;
 	static int ePosY3;
+	static int ePosY4;
+	static int ePosY5;
 
 	static int eHP1;
 	static int eHP2;
 	static int eHP3;
+	static int eHP4;
+	static int eHP5;
 
 	static int pPosX;
 	static int pPosY;
