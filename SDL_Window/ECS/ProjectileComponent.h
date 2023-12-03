@@ -31,6 +31,16 @@ public:
 			std::cout << "Out of bounds" << std::endl;
 			entity->destroy();
 		}
+
+		else if (transform->position.x < Game::ePosX + 110 and
+				transform->position.x > Game::ePosX and
+				transform->position.y < Game::ePosY + 110 and
+				transform->position.y > Game::ePosY
+			) {
+			entity->destroy();
+			Game::eHP = Game::eHP - 20;
+			std::cout << "Enemy hit! HP: " << Game::eHP << std::endl;
+		}
 	}
 
 private:

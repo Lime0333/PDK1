@@ -184,9 +184,9 @@
     <None Include="moai.bat" />
     <None Include="noAmmo.bat" />
     <None Include="reload.bat" />
+    <None Include="wait1.bat" />
   </ItemGroup>
   <ItemGroup>
-    <Media Include="..\..\..\..\Downloads\moai.mp4" />
     <Media Include="assets\sounds\moai.mp3">
       <DeploymentContent>true</DeploymentContent>
     </Media>

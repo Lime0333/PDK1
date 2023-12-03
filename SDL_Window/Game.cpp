@@ -33,6 +33,7 @@ int Game::kierunek = 0;
 int Game::pPosX; 
 int Game::pPosY;
 int Game::HP = 100;
+int Game::eHP = 100;
 int Game::cooldown = 5;
 int Game::ePosX;
 int Game::ePosY;
@@ -117,7 +118,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	enemy.addComponent<SpriteComponent>("enemy", true);
 	enemy.addComponent<EnemyMovement>();
 	enemy.addComponent<ColliderComponent>("enemy");
-	enemy.addGroup(groupPlayers);
+	enemy.addGroup(groupEnemies);
 
 	SDL_Color white = { 255,255,255,255 };
 	SDL_Color HP_red = { 220,20,60,150 };
@@ -128,6 +129,9 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 }
 
+void Game::killEnemy() {
+	enemy.delGroup(groupEnemies);
+}
 
 auto& tiles(manager.getGroup(Game::groupMap));
 auto& players(manager.getGroup(Game::groupPlayers));
@@ -297,10 +301,11 @@ void Game::render()
 	for (auto& t : players) {
 		t->draw();
 	}
-
+	
 	for (auto& e : enemies) {
 		e->draw();
 	}
+	
 
 	//enemies usuniete
 	

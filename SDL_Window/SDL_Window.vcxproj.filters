@@ -118,9 +118,11 @@
     <None Include="init.bat">
       <Filter>Pliki źródłowe</Filter>
     </None>
+    <None Include="wait1.bat">
+      <Filter>Pliki źródłowe</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Media Include="assets\sounds\moai.mp3" />
-    <Media Include="..\..\..\..\Downloads\moai.mp4" />
   </ItemGroup>
 </Project>
