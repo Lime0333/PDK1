@@ -139,6 +139,7 @@
     <None Include="BAT\EDeath2.bat">
       <Filter>Pliki źródłowe</Filter>
     </None>
+    <None Include="BAT\EGunShot.bat" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="assets\sounds\moai.mp3" />

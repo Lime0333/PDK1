@@ -64,6 +64,12 @@ public:
 	static int eHP4;
 	static int eHP5;
 
+	static int eCool1;
+	static int eCool2;
+	static int eCool3;
+	static int eCool4;
+	static int eCool5;
+
 	static int pPosX;
 	static int pPosY;
 

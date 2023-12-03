@@ -191,6 +191,7 @@
     <None Include="BAT\reload.bat" />
     <None Include="BAT\wait1.bat" />
     <None Include="BAT\EDeath2.bat" />
+    <None Include="BAT\EGunShot.bat" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="assets\sounds\moai.mp3">

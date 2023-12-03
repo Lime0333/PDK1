@@ -9,7 +9,7 @@ public:
 
 	int aniUD = 0, aniLR = 0,kierunek=0;
 	bool alive = true;
-	int PozX, PozY;
+	int PozX, PozY,cool;
 	int Eid = 3;
 
 	void init() override {
@@ -22,6 +22,8 @@ public:
 		PozX = Game::ePosX3;
 		PozY = Game::ePosY3;
 
+		cool = Game::eCool3;
+
 		if (Game::eHP3 <= 0 and alive) {
 			for (float i = 30; i > 0; i = i - 10) {
 				transform->velocity.y = i;
@@ -32,8 +34,9 @@ public:
 
 		if (alive) {
 
-			Game::ESpawnP(Eid, kierunek);
-
+			if (cool < 0) {
+				Game::ESpawnP(Eid, kierunek);
+			}
 			//transform->velocity.y = -1;
 
 			//std::cout << Game::ePosX <<"   " << Game::ePosY << std::endl;
