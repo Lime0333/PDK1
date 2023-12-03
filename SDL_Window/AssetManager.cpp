@@ -11,8 +11,10 @@ AssetManager::~AssetManager() {
 
 }
 
-void AssetManager::CreateProjectile(Vector2D pos, Vector2D vel, int range, int speed, std::string id, bool LR,int owner)
+void AssetManager::CreateProjectile(Vector2D pos, Vector2D vel, int range, int speed, std::string id, bool LR, int owner)
 {
+	char name[12] = {'p','r','o','j','e','c','t','i','l','e',char(owner),NULL};
+
 	auto& projectile(manager->addEntity());
 
 	if (LR) {
@@ -23,7 +25,7 @@ void AssetManager::CreateProjectile(Vector2D pos, Vector2D vel, int range, int s
 	}
 	projectile.addComponent<SpriteComponent>(id, false);
 	projectile.addComponent<ProjectileComponent>(range, speed, vel);
-	projectile.addComponent<ColliderComponent>("projectile");
+	projectile.addComponent<ColliderComponent>(name);
 	projectile.addGroup(Game::groupProjectiles);
 }
 

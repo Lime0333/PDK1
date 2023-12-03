@@ -15,7 +15,7 @@ public:
 
 	//gameobjects
 
-	void CreateProjectile(Vector2D pos,Vector2D vel, int range, int speed,std::string id,bool LR,int owner);
+	void CreateProjectile(Vector2D pos,Vector2D vel, int range, int speed,std::string id,bool LR, int owner);
 
 
 

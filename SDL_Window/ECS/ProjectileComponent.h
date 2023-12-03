@@ -33,7 +33,7 @@ public:
 			entity->destroy();
 		}
 
-		else{
+		else {
 			if (transform->position.x < Game::ePosX1 + 110 and
 				transform->position.x > Game::ePosX1 and
 				transform->position.y < Game::ePosY1 + 110 and
@@ -63,14 +63,17 @@ public:
 				Game::eHP3 = Game::eHP3 - 20;
 				std::cout << "Enemy 3 hit! HP: " << Game::eHP3 << std::endl;
 			}
+			else {
+				
 
+			}
 		}
 	}
 
 private:
 	TransformComponent* transform;
 
-	int range=0, speed=0, distance=0;
+	int range=0, speed=0, distance=0,owner;
 	Vector2D velocity;
 
 };

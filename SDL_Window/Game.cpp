@@ -80,7 +80,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	//system("moai.bat");
 	
 	system("BAT\\KillVLC.bat");
-	//system("BAT\\init.bat");
+	system("BAT\\init.bat");
 
 	for (int i=0; i < MAXammo; i++) {
 		ammoString[i] = char(177);
@@ -283,8 +283,9 @@ void Game::update() {
 
 	for (auto& p : projectiles) {
 		if (Collision::AABB(player.getComponent<ColliderComponent>().collider, p->getComponent<ColliderComponent>().collider)) {
-			//std::cout << "Hit player" << std::endl;
-			//p->destroy();
+			Game::HP = Game::HP - 10;
+			std::cout << "Hit player" << std::endl;
+			p->destroy();
 		}
 	}
 
@@ -315,28 +316,28 @@ void Game::spawnProjectile() {
 		switch (kierunek) {
 
 		case 0:
-			Game::assets->CreateProjectile(Vector2D(pPosX + 120, pPosY + 95), Vector2D(2, 0), 200, 2, "projectileR", true, 0);
+			Game::assets->CreateProjectile(Vector2D(pPosX + 130, pPosY + 95), Vector2D(2, 0), 200, 2, "projectileR", true, 0);
 			break;
 		case 1:
-			Game::assets->CreateProjectile(Vector2D(pPosX - 15, pPosY + 26), Vector2D(-2, 0), 200, 2, "projectileL", true, 0);
+			Game::assets->CreateProjectile(Vector2D(pPosX - 25, pPosY + 26), Vector2D(-2, 0), 200, 2, "projectileL", true, 0);
 			break;
 		case 2:
-			Game::assets->CreateProjectile(Vector2D(pPosX + 95, pPosY - 10), Vector2D(0, -2), 200, 2, "projectileU", false, 0);
+			Game::assets->CreateProjectile(Vector2D(pPosX + 95, pPosY - 25), Vector2D(0, -2), 200, 2, "projectileU", false, 0);
 			break;
 		case 3:
-			Game::assets->CreateProjectile(Vector2D(pPosX + 26, pPosY + 120), Vector2D(0, 2), 200, 2, "projectileD", false, 0);
+			Game::assets->CreateProjectile(Vector2D(pPosX + 26, pPosY + 130), Vector2D(0, 2), 200, 2, "projectileD", false, 0);
 			break;
 		case 4:
-			Game::assets->CreateProjectile(Vector2D(pPosX + 120, pPosY + 95), Vector2D(2, -2), 200, 2, "projectileR", true, 0);
+			Game::assets->CreateProjectile(Vector2D(pPosX + 130, pPosY + 95), Vector2D(2, -2), 200, 2, "projectileR", true, 0);
 			break;
 		case 5:
-			Game::assets->CreateProjectile(Vector2D(pPosX + 120, pPosY + 95), Vector2D(2, 2), 200, 2, "projectileR", true, 0);
+			Game::assets->CreateProjectile(Vector2D(pPosX + 130, pPosY + 95), Vector2D(2, 2), 200, 2, "projectileR", true, 0);
 			break;
 		case 6:
-			Game::assets->CreateProjectile(Vector2D(pPosX - 15, pPosY + 26), Vector2D(-2, -2), 200, 2, "projectileL", true, 0);
+			Game::assets->CreateProjectile(Vector2D(pPosX - 25, pPosY + 26), Vector2D(-2, -2), 200, 2, "projectileL", true, 0);
 			break;
 		case 7:
-			Game::assets->CreateProjectile(Vector2D(pPosX - 15, pPosY + 26), Vector2D(-2, 2), 200, 2, "projectileL", true, 0);
+			Game::assets->CreateProjectile(Vector2D(pPosX - 25, pPosY + 26), Vector2D(-2, 2), 200, 2, "projectileL", true, 0);
 			break;
 		default:
 			break;
