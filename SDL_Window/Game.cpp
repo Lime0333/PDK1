@@ -1,4 +1,4 @@
-#include "Game.hpp"
+﻿#include "Game.hpp"
 
 #include"TextureManager.h"
 #include"Map.h"
@@ -137,6 +137,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	assets->AddFont("goudysto", "assets/GOUDYSTO.TTF", 30);
 	assets->AddFont("comic", "assets/comic.ttf", 40);
 	assets->AddFont("arial", "assets/arialbd.ttf", 30);
+	assets->AddFont("raster", "assets/raster.ttf", 30);
 	
 
 	map = new Map("terrain", 3, 32);
