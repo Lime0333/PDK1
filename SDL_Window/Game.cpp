@@ -33,10 +33,13 @@ auto& enemy3(manager.addEntity());
 auto& label(manager.addEntity());
 
 //0=right 1=left 2=up 3=down 4=right-up 5=right-down 6=left-up 7=left-down
+
+int MAXHP = 100;
+
 int Game::kierunek = 0;
 int Game::pPosX; 
 int Game::pPosY;
-int Game::HP = 100;
+int Game::HP = MAXHP;
 int Game::cooldown = 5;
 
 int Game::ePosX1;
@@ -65,7 +68,7 @@ int Game::eCool5 = 500;
 
 const int Game::MAXammo = 5;
 int Game::ammo = Game::MAXammo;
-char ammoString[Game::MAXammo];
+char ammoString[Game::MAXammo], HPString[20];
 int cooldownVLC;
 
 Game::Game()
@@ -127,7 +130,8 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	assets->AddTexture("projectileD", "assets/bullet/bulletD.png");
 
 	assets->AddFont("goudysto", "assets/GOUDYSTO.TTF", 30);
-	assets->AddFont("comic", "assets/comic.ttf", 30);
+	assets->AddFont("comic", "assets/comic.ttf", 40);
+	assets->AddFont("arial", "assets/arialbd.ttf", 30);
 	
 
 	map = new Map("terrain", 3, 32);
@@ -166,7 +170,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	SDL_Color darkGreyGreen = { 91, 101, 51,150 };
 
 	
-	label.addComponent<UILabel>(10, 10, "Test String", "goudysto", HP_red);
+	label.addComponent<UILabel>(10, 10, "Test String", "comic", HP_red);
 
 }
 /*
@@ -230,6 +234,22 @@ void Game::update() {
 			}
 			
 		}
+		p = 0;
+		
+		
+		for (int i = 0; i < MAXHP/20; i++) {
+			//std::cout << HP << "  " << p << std::endl;
+			if (p < (HP+10)/20) {
+				p++;
+				HPString[i] = '#';
+			}
+			else {
+				HPString[i] = ' ';
+			}
+		}
+
+		
+
 		
 	}
 
@@ -268,8 +288,8 @@ void Game::update() {
 	//std::cout << playerPos.x<<"      "<<playerPos.y << std::endl;
 
 	std::stringstream ss;
-	ss << "HP:  " << HP << '%'<<"                             "<< ammoString;
-	label.getComponent<UILabel>().SetLabelText(ss.str(), "goudysto");
+	ss << "HP:  " << HPString <<"                        Ammo: "<< ammoString;
+	label.getComponent<UILabel>().SetLabelText(ss.str(), "comic");
 	
 	manager.refresh();
 	manager.update();
@@ -359,28 +379,28 @@ void Game::ESpawnP(int Eid, int kierunek) {
 		switch (kierunek) {
 
 		case 0:
-			Game::assets->CreateProjectile(Vector2D(Game::ePosX1 + 120, Game::ePosY1 + 95), Vector2D(2, 0), 200, 2, "projectileR", true, Eid);
+			Game::assets->CreateProjectile(Vector2D(Game::ePosX1 + 130, Game::ePosY1 + 95), Vector2D(2, 0), 200, 2, "projectileR", true, Eid);
 			break;
 		case 1:
-			Game::assets->CreateProjectile(Vector2D(Game::ePosX1 - 15, Game::ePosY1 + 26), Vector2D(-2, 0), 200, 2, "projectileL", true, Eid);
+			Game::assets->CreateProjectile(Vector2D(Game::ePosX1 - 25, Game::ePosY1 + 26), Vector2D(-2, 0), 200, 2, "projectileL", true, Eid);
 			break;
 		case 2:
-			Game::assets->CreateProjectile(Vector2D(Game::ePosX1 + 95, Game::ePosY1 - 10), Vector2D(0, -2), 200, 2, "projectileU", false, Eid);
+			Game::assets->CreateProjectile(Vector2D(Game::ePosX1 + 95, Game::ePosY1 - 25), Vector2D(0, -2), 200, 2, "projectileU", false, Eid);
 			break;
 		case 3:
-			Game::assets->CreateProjectile(Vector2D(Game::ePosX1 + 26, Game::ePosY1 + 120), Vector2D(0, 2), 200, 2, "projectileD", false, Eid);
+			Game::assets->CreateProjectile(Vector2D(Game::ePosX1 + 26, Game::ePosY1 + 130), Vector2D(0, 2), 200, 2, "projectileD", false, Eid);
 			break;
 		case 4:
-			Game::assets->CreateProjectile(Vector2D(Game::ePosX1 + 120, Game::ePosY1 + 95), Vector2D(2, -2), 200, 2, "projectileR", true, Eid);
+			Game::assets->CreateProjectile(Vector2D(Game::ePosX1 + 130, Game::ePosY1 + 95), Vector2D(2, -2), 200, 2, "projectileR", true, Eid);
 			break;
 		case 5:
-			Game::assets->CreateProjectile(Vector2D(Game::ePosX1 + 120, Game::ePosY1 + 95), Vector2D(2, 2), 200, 2, "projectileR", true, Eid);
+			Game::assets->CreateProjectile(Vector2D(Game::ePosX1 + 130, Game::ePosY1 + 95), Vector2D(2, 2), 200, 2, "projectileR", true, Eid);
 			break;
 		case 6:
-			Game::assets->CreateProjectile(Vector2D(Game::ePosX1 - 15, Game::ePosY1 + 26), Vector2D(-2, -2), 200, 2, "projectileL", true, Eid);
+			Game::assets->CreateProjectile(Vector2D(Game::ePosX1 - 25, Game::ePosY1 + 26), Vector2D(-2, -2), 200, 2, "projectileL", true, Eid);
 			break;
 		case 7:
-			Game::assets->CreateProjectile(Vector2D(Game::ePosX1 - 15, Game::ePosY1 + 26), Vector2D(-2, 2), 200, 2, "projectileL", true, Eid);
+			Game::assets->CreateProjectile(Vector2D(Game::ePosX1 - 25, Game::ePosY1 + 26), Vector2D(-2, 2), 200, 2, "projectileL", true, Eid);
 			break;
 		default:
 			break;
@@ -394,28 +414,28 @@ void Game::ESpawnP(int Eid, int kierunek) {
 		switch (kierunek) {
 
 		case 0:
-			Game::assets->CreateProjectile(Vector2D(Game::ePosX2 + 120, Game::ePosY2 + 95), Vector2D(2, 0), 200, 2, "projectileR", true, Eid);
+			Game::assets->CreateProjectile(Vector2D(Game::ePosX2 + 130, Game::ePosY2 + 95), Vector2D(2, 0), 200, 2, "projectileR", true, Eid);
 			break;
 		case 1:
-			Game::assets->CreateProjectile(Vector2D(Game::ePosX2 - 15, Game::ePosY2 + 26), Vector2D(-2, 0), 200, 2, "projectileL", true, Eid);
+			Game::assets->CreateProjectile(Vector2D(Game::ePosX2 - 25, Game::ePosY2 + 26), Vector2D(-2, 0), 200, 2, "projectileL", true, Eid);
 			break;
 		case 2:
-			Game::assets->CreateProjectile(Vector2D(Game::ePosX2 + 95, Game::ePosY2 - 10), Vector2D(0, -2), 200, 2, "projectileU", false, Eid);
+			Game::assets->CreateProjectile(Vector2D(Game::ePosX2 + 95, Game::ePosY2 - 25), Vector2D(0, -2), 200, 2, "projectileU", false, Eid);
 			break;
 		case 3:
-			Game::assets->CreateProjectile(Vector2D(Game::ePosX2 + 26, Game::ePosY2 + 120), Vector2D(0, 2), 200, 2, "projectileD", false, Eid);
+			Game::assets->CreateProjectile(Vector2D(Game::ePosX2 + 26, Game::ePosY2 + 130), Vector2D(0, 2), 200, 2, "projectileD", false, Eid);
 			break;
 		case 4:
-			Game::assets->CreateProjectile(Vector2D(Game::ePosX2 + 120, Game::ePosY2 + 95), Vector2D(2, -2), 200, 2, "projectileR", true, Eid);
+			Game::assets->CreateProjectile(Vector2D(Game::ePosX2 + 130, Game::ePosY2 + 95), Vector2D(2, -2), 200, 2, "projectileR", true, Eid);
 			break;
 		case 5:
-			Game::assets->CreateProjectile(Vector2D(Game::ePosX2 + 120, Game::ePosY2 + 95), Vector2D(2, 2), 200, 2, "projectileR", true, Eid);
+			Game::assets->CreateProjectile(Vector2D(Game::ePosX2 + 130, Game::ePosY2 + 95), Vector2D(2, 2), 200, 2, "projectileR", true, Eid);
 			break;
 		case 6:
-			Game::assets->CreateProjectile(Vector2D(Game::ePosX2 - 15, Game::ePosY2 + 26), Vector2D(-2, -2), 200, 2, "projectileL", true, Eid);
+			Game::assets->CreateProjectile(Vector2D(Game::ePosX2 - 25, Game::ePosY2 + 26), Vector2D(-2, -2), 200, 2, "projectileL", true, Eid);
 			break;
 		case 7:
-			Game::assets->CreateProjectile(Vector2D(Game::ePosX2 - 15, Game::ePosY2 + 26), Vector2D(-2, 2), 200, 2, "projectileL", true, Eid);
+			Game::assets->CreateProjectile(Vector2D(Game::ePosX2 - 25, Game::ePosY2 + 26), Vector2D(-2, 2), 200, 2, "projectileL", true, Eid);
 			break;
 		default:
 			break;
@@ -429,28 +449,28 @@ void Game::ESpawnP(int Eid, int kierunek) {
 		switch (kierunek) {
 
 		case 0:
-			Game::assets->CreateProjectile(Vector2D(Game::ePosX3 + 120, Game::ePosY3 + 95), Vector2D(2, 0), 200, 2, "projectileR", true, Eid);
+			Game::assets->CreateProjectile(Vector2D(Game::ePosX3 + 130, Game::ePosY3 + 95), Vector2D(2, 0), 200, 2, "projectileR", true, Eid);
 			break;
 		case 1:
-			Game::assets->CreateProjectile(Vector2D(Game::ePosX3 - 15, Game::ePosY3 + 26), Vector2D(-2, 0), 200, 2, "projectileL", true, Eid);
+			Game::assets->CreateProjectile(Vector2D(Game::ePosX3 - 25, Game::ePosY3 + 26), Vector2D(-2, 0), 200, 2, "projectileL", true, Eid);
 			break;
 		case 2:
-			Game::assets->CreateProjectile(Vector2D(Game::ePosX3 + 95, Game::ePosY3 - 10), Vector2D(0, -2), 200, 2, "projectileU", false, Eid);
+			Game::assets->CreateProjectile(Vector2D(Game::ePosX3 + 95, Game::ePosY3 - 25), Vector2D(0, -2), 200, 2, "projectileU", false, Eid);
 			break;
 		case 3:
-			Game::assets->CreateProjectile(Vector2D(Game::ePosX3 + 26, Game::ePosY3 + 120), Vector2D(0, 2), 200, 2, "projectileD", false, Eid);
+			Game::assets->CreateProjectile(Vector2D(Game::ePosX3 + 26, Game::ePosY3 + 130), Vector2D(0, 2), 200, 2, "projectileD", false, Eid);
 			break;
 		case 4:
-			Game::assets->CreateProjectile(Vector2D(Game::ePosX3 + 120, Game::ePosY3 + 95), Vector2D(2, -2), 200, 2, "projectileR", true, Eid);
+			Game::assets->CreateProjectile(Vector2D(Game::ePosX3 + 130, Game::ePosY3 + 95), Vector2D(2, -2), 200, 2, "projectileR", true, Eid);
 			break;
 		case 5:
-			Game::assets->CreateProjectile(Vector2D(Game::ePosX3 + 120, Game::ePosY3 + 95), Vector2D(2, 2), 200, 2, "projectileR", true, Eid);
+			Game::assets->CreateProjectile(Vector2D(Game::ePosX3 + 130, Game::ePosY3 + 95), Vector2D(2, 2), 200, 2, "projectileR", true, Eid);
 			break;
 		case 6:
-			Game::assets->CreateProjectile(Vector2D(Game::ePosX3 - 15, Game::ePosY3 + 26), Vector2D(-2, -2), 200, 2, "projectileL", true, Eid);
+			Game::assets->CreateProjectile(Vector2D(Game::ePosX3 - 25, Game::ePosY3 + 26), Vector2D(-2, -2), 200, 2, "projectileL", true, Eid);
 			break;
 		case 7:
-			Game::assets->CreateProjectile(Vector2D(Game::ePosX3 - 15, Game::ePosY3 + 26), Vector2D(-2, 2), 200, 2, "projectileL", true, Eid);
+			Game::assets->CreateProjectile(Vector2D(Game::ePosX3 - 25, Game::ePosY3 + 26), Vector2D(-2, 2), 200, 2, "projectileL", true, Eid);
 			break;
 		default:
 			break;
@@ -464,28 +484,28 @@ void Game::ESpawnP(int Eid, int kierunek) {
 		switch (kierunek) {
 
 		case 0:
-			Game::assets->CreateProjectile(Vector2D(Game::ePosX4 + 120, Game::ePosY4 + 95), Vector2D(2, 0), 200, 2, "projectileR", true, Eid);
+			Game::assets->CreateProjectile(Vector2D(Game::ePosX4 + 130, Game::ePosY4 + 95), Vector2D(2, 0), 200, 2, "projectileR", true, Eid);
 			break;
 		case 1:
-			Game::assets->CreateProjectile(Vector2D(Game::ePosX4 - 15, Game::ePosY4 + 26), Vector2D(-2, 0), 200, 2, "projectileL", true, Eid);
+			Game::assets->CreateProjectile(Vector2D(Game::ePosX4 - 25, Game::ePosY4 + 26), Vector2D(-2, 0), 200, 2, "projectileL", true, Eid);
 			break;
 		case 2:
-			Game::assets->CreateProjectile(Vector2D(Game::ePosX4 + 95, Game::ePosY4 - 10), Vector2D(0, -2), 200, 2, "projectileU", false, Eid);
+			Game::assets->CreateProjectile(Vector2D(Game::ePosX4 + 95, Game::ePosY4 - 25), Vector2D(0, -2), 200, 2, "projectileU", false, Eid);
 			break;
 		case 3:
-			Game::assets->CreateProjectile(Vector2D(Game::ePosX4 + 26, Game::ePosY4 + 120), Vector2D(0, 2), 200, 2, "projectileD", false, Eid);
+			Game::assets->CreateProjectile(Vector2D(Game::ePosX4 + 26, Game::ePosY4 + 130), Vector2D(0, 2), 200, 2, "projectileD", false, Eid);
 			break;
 		case 4:
-			Game::assets->CreateProjectile(Vector2D(Game::ePosX4 + 120, Game::ePosY4 + 95), Vector2D(2, -2), 200, 2, "projectileR", true, Eid);
+			Game::assets->CreateProjectile(Vector2D(Game::ePosX4 + 130, Game::ePosY4 + 95), Vector2D(2, -2), 200, 2, "projectileR", true, Eid);
 			break;
 		case 5:
-			Game::assets->CreateProjectile(Vector2D(Game::ePosX4 + 120, Game::ePosY4 + 95), Vector2D(2, 2), 200, 2, "projectileR", true, Eid);
+			Game::assets->CreateProjectile(Vector2D(Game::ePosX4 + 130, Game::ePosY4 + 95), Vector2D(2, 2), 200, 2, "projectileR", true, Eid);
 			break;
 		case 6:
-			Game::assets->CreateProjectile(Vector2D(Game::ePosX4 - 15, Game::ePosY4 + 26), Vector2D(-2, -2), 200, 2, "projectileL", true, Eid);
+			Game::assets->CreateProjectile(Vector2D(Game::ePosX4 - 25, Game::ePosY4 + 26), Vector2D(-2, -2), 200, 2, "projectileL", true, Eid);
 			break;
 		case 7:
-			Game::assets->CreateProjectile(Vector2D(Game::ePosX4 - 15, Game::ePosY4 + 26), Vector2D(-2, 2), 200, 2, "projectileL", true, Eid);
+			Game::assets->CreateProjectile(Vector2D(Game::ePosX4 - 25, Game::ePosY4 + 26), Vector2D(-2, 2), 200, 2, "projectileL", true, Eid);
 			break;
 		default:
 			break;
@@ -499,28 +519,28 @@ void Game::ESpawnP(int Eid, int kierunek) {
 		switch (kierunek) {
 
 		case 0:
-			Game::assets->CreateProjectile(Vector2D(Game::ePosX5 + 120, Game::ePosY5 + 95), Vector2D(2, 0), 200, 2, "projectileR", true, Eid);
+			Game::assets->CreateProjectile(Vector2D(Game::ePosX5 + 130, Game::ePosY5 + 95), Vector2D(2, 0), 200, 2, "projectileR", true, Eid);
 			break;
 		case 1:
-			Game::assets->CreateProjectile(Vector2D(Game::ePosX5 - 15, Game::ePosY5 + 26), Vector2D(-2, 0), 200, 2, "projectileL", true, Eid);
+			Game::assets->CreateProjectile(Vector2D(Game::ePosX5 - 25, Game::ePosY5 + 26), Vector2D(-2, 0), 200, 2, "projectileL", true, Eid);
 			break;
 		case 2:
-			Game::assets->CreateProjectile(Vector2D(Game::ePosX5 + 95, Game::ePosY5 - 10), Vector2D(0, -2), 200, 2, "projectileU", false, Eid);
+			Game::assets->CreateProjectile(Vector2D(Game::ePosX5 + 95, Game::ePosY5 - 25), Vector2D(0, -2), 200, 2, "projectileU", false, Eid);
 			break;
 		case 3:
-			Game::assets->CreateProjectile(Vector2D(Game::ePosX5 + 26, Game::ePosY5 + 120), Vector2D(0, 2), 200, 2, "projectileD", false, Eid);
+			Game::assets->CreateProjectile(Vector2D(Game::ePosX5 + 26, Game::ePosY5 + 130), Vector2D(0, 2), 200, 2, "projectileD", false, Eid);
 			break;
 		case 4:
-			Game::assets->CreateProjectile(Vector2D(Game::ePosX5 + 120, Game::ePosY5 + 95), Vector2D(2, -2), 200, 2, "projectileR", true, Eid);
+			Game::assets->CreateProjectile(Vector2D(Game::ePosX5 + 130, Game::ePosY5 + 95), Vector2D(2, -2), 200, 2, "projectileR", true, Eid);
 			break;
 		case 5:
-			Game::assets->CreateProjectile(Vector2D(Game::ePosX5 + 120, Game::ePosY5 + 95), Vector2D(2, 2), 200, 2, "projectileR", true, Eid);
+			Game::assets->CreateProjectile(Vector2D(Game::ePosX5 + 130, Game::ePosY5 + 95), Vector2D(2, 2), 200, 2, "projectileR", true, Eid);
 			break;
 		case 6:
-			Game::assets->CreateProjectile(Vector2D(Game::ePosX5 - 15, Game::ePosY5 + 26), Vector2D(-2, -2), 200, 2, "projectileL", true, Eid);
+			Game::assets->CreateProjectile(Vector2D(Game::ePosX5 - 25, Game::ePosY5 + 26), Vector2D(-2, -2), 200, 2, "projectileL", true, Eid);
 			break;
 		case 7:
-			Game::assets->CreateProjectile(Vector2D(Game::ePosX5 - 15, Game::ePosY5 + 26), Vector2D(-2, 2), 200, 2, "projectileL", true, Eid);
+			Game::assets->CreateProjectile(Vector2D(Game::ePosX5 - 25, Game::ePosY5 + 26), Vector2D(-2, 2), 200, 2, "projectileL", true, Eid);
 			break;
 		default:
 			break;
