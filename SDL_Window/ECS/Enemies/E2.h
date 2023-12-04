@@ -10,7 +10,7 @@ public:
 	int aniUD = 0, aniLR = 0,kierunek=0;
 	bool alive = true;
 	int PozX, PozY,cool;
-	int Eid = 2;
+	int Eid = 2, socialDistance=350;
 
 	void init() override {
 		transform = &entity->getComponent<TransformComponent>();
@@ -45,11 +45,12 @@ public:
 
 			//0=right 1=left 2=up 3=down 4=right-up 5=right-down 6=left-up 7=left-down
 
-			if (PozX > Game::pPosX + 10 + E1::socialDistance) {
+
+			if (PozX > Game::pPosX + 10 + socialDistance) {
 				transform->velocity.x = -0.5;
 				aniLR = 1;
 			}
-			else if (PozX < Game::pPosX - 10 - E1::socialDistance) {
+			else if (PozX < Game::pPosX - 10 - socialDistance) {
 				transform->velocity.x = 0.5;
 				aniLR = 2;
 			}
@@ -57,20 +58,19 @@ public:
 
 				transform->velocity.x = 0;
 				aniLR = 0;
-				sprite->Play("Idle");
+
 			}
-			if (PozY > Game::pPosY + 10 + E1::socialDistance) {
+			if (PozY > Game::pPosY + 10 + socialDistance) {
 				transform->velocity.y = -0.5;
 				aniUD = 1;
 			}
-			else if (PozY < Game::pPosY - 10 - E1::socialDistance) {
+			else if (PozY < Game::pPosY - 10 - socialDistance) {
 				transform->velocity.y = 0.5;
 				aniUD = 2;
 			}
 			else {
 				transform->velocity.y = 0;
 				aniUD = 0;
-				sprite->Play("IdleUP");
 			}
 
 			//std::cout << aniUD<<"   "<<aniLR << std::endl;
@@ -119,7 +119,35 @@ public:
 					kierunek = 0;
 				}
 				else if (aniLR == 0) {
-
+					//0=right 1=left 2=up 3=down 4=right-up 5=right-down 6=left-up 7=left-down
+					switch (kierunek) {
+					case 0:
+						sprite->Play("Idle");
+						break;
+					case 1:
+						sprite->Play("IdleL");
+						break;
+					case 2:
+						sprite->Play("IdleUP");
+						break;
+					case 3:
+						sprite->Play("IdleDOWN");
+						break;
+					case 4:
+						sprite->Play("Idle");
+						break;
+					case 5:
+						sprite->Play("Idle");
+						break;
+					case 6:
+						sprite->Play("IdleL");
+						break;
+					case 7:
+						sprite->Play("IdleL");
+						break;
+					default:
+						break;
+					}
 				}
 			}
 
