@@ -10,6 +10,9 @@ public:
 	int aniUD = 0, aniLR = 0,kierunek=0;
 	bool alive=true;
 	int Eid = 1;
+
+	const static int socialDistance = 200;
+
 	int PozX, PozY , cool;
 
 	void init() override {
@@ -44,11 +47,11 @@ public:
 
 			//0=right 1=left 2=up 3=down 4=right-up 5=right-down 6=left-up 7=left-down
 
-			if (PozX > Game::pPosX + 10) {
+			if (PozX > Game::pPosX + 10 + socialDistance) {
 				transform->velocity.x = -0.5;
 				aniLR = 1;
 			}
-			else if (PozX < Game::pPosX - 10) {
+			else if (PozX < Game::pPosX - 10 - socialDistance) {
 				transform->velocity.x = 0.5;
 				aniLR = 2;
 			}
@@ -58,11 +61,11 @@ public:
 				aniLR = 0;
 				sprite->Play("Idle");
 			}
-			if (PozY > Game::pPosY + 10) {
+			if (PozY > Game::pPosY + 10 + socialDistance) {
 				transform->velocity.y = -0.5;
 				aniUD = 1;
 			}
-			else if (PozY < Game::pPosY - 10) {
+			else if (PozY < Game::pPosY - 10 - socialDistance) {
 				transform->velocity.y = 0.5;
 				aniUD = 2;
 			}
