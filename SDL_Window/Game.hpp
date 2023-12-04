@@ -73,6 +73,9 @@ public:
 	static int pPosX;
 	static int pPosY;
 
+	static int pCenterX;
+	static int pCenterY;
+
 
 	enum groupLabels : std::size_t {
 		groupMap,

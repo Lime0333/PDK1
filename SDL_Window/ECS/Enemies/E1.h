@@ -83,10 +83,12 @@ public:
 					kierunek = 2;
 				}
 				else if (aniLR == 1) {
+					sprite->Play("WalkL");
 					//UL anim
 					kierunek = 6;
 				}
 				else if (aniLR == 2) {
+					sprite->Play("Walk");
 					//UR anim
 					kierunek = 4;
 				}
@@ -98,10 +100,12 @@ public:
 					kierunek = 3;
 				}
 				else if (aniLR == 1) {
+					sprite->Play("WalkL");
 					//DL anim
 					kierunek = 7;
 				}
 				else if (aniLR == 2) {
+					sprite->Play("Walk");
 					//DR anim
 					kierunek = 5;
 				}

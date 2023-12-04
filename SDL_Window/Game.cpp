@@ -40,6 +40,10 @@ int MAXHP = 100;
 int Game::kierunek = 0;
 int Game::pPosX; 
 int Game::pPosY;
+
+int Game::pCenterX;
+int Game::pCenterY;
+
 int Game::HP = MAXHP;
 int Game::cooldown = 5;
 
@@ -61,11 +65,11 @@ int Game::eHP3 = 100;
 int Game::eHP4 = 100;
 int Game::eHP5 = 100;
 
-int Game::eCool1 = 500;
-int Game::eCool2 = 500;
-int Game::eCool3 = 500;
-int Game::eCool4 = 500;
-int Game::eCool5 = 500;
+int Game::eCool1 = 200;
+int Game::eCool2 = 200;
+int Game::eCool3 = 200;
+int Game::eCool4 = 200;
+int Game::eCool5 = 200;
 
 const int Game::MAXammo = 5;
 int Game::ammo = Game::MAXammo;
@@ -262,6 +266,8 @@ void Game::update() {
 	pPosX = playerPos.x;
 	pPosY = playerPos.y;
 
+	pCenterX = pPosX + 55;
+	pCenterY = pPosY + 55;
 
 
 
@@ -377,17 +383,17 @@ void Game::ESpawnP(int Eid, int kierunek) {
 	
 	switch (Eid) {
 	case 1:
-		Game::eCool1 = 410;
+		Game::eCool1 = 80;
 		ESpawnPPosX = Game::ePosX1;
 		ESpawnPPosY = Game::ePosY1;
 		break;
 	case 2:
-		Game::eCool2 = 420;
+		Game::eCool2 = 100;
 		ESpawnPPosX = Game::ePosX2;
 		ESpawnPPosY = Game::ePosY2;
 		break;
 	case 3:
-		Game::eCool3 = 430;
+		Game::eCool3 = 120;
 		ESpawnPPosX = Game::ePosX3;
 		ESpawnPPosY = Game::ePosY3;
 		break;
@@ -397,7 +403,7 @@ void Game::ESpawnP(int Eid, int kierunek) {
 		ESpawnPPosY = Game::ePosY4;
 		break;
 	case 5:
-		Game::eCool5 = 450;
+		Game::eCool5 = 80;
 		ESpawnPPosX = Game::ePosX5;
 		ESpawnPPosY = Game::ePosY5;
 		break;
@@ -416,9 +422,14 @@ void Game::ESpawnP(int Eid, int kierunek) {
 		ESpawnPPosY = ESpawnPPosY + 26;
 
 		break;
-	case 3:
+	case 2:
 		ESpawnPPosX = ESpawnPPosX + 95;
-		ESpawnPPosY = ESpawnPPosY -25;
+		ESpawnPPosY = ESpawnPPosY - 26;
+
+		break;
+	case 3:
+		ESpawnPPosX = ESpawnPPosX + 26;
+		ESpawnPPosY = ESpawnPPosY + 132;
 
 		break;
 	case 4:
@@ -447,14 +458,14 @@ void Game::ESpawnP(int Eid, int kierunek) {
 	}
 
 
-	if (abs(ESpawnPPosX - pPosX) > abs(ESpawnPPosY - pPosX)) {
-		EPVecX = 2 * (pPosX - ESpawnPPosX) / abs(pPosX - ESpawnPPosX);
-		EPVecY = 2 * (pPosY - ESpawnPPosY) / abs(pPosX - ESpawnPPosX);
+	if (abs(ESpawnPPosX - pCenterX) > abs(ESpawnPPosY - pCenterY)) {
+		EPVecX = 2 * (pCenterX - ESpawnPPosX) / abs(pCenterX - ESpawnPPosX);
+		EPVecY = 2 * (pCenterY - ESpawnPPosY) / abs(pCenterX - ESpawnPPosX);
 
 	}
 	else {
-		EPVecX = 2 * (pPosX - ESpawnPPosX) / abs(pPosY - ESpawnPPosY);
-		EPVecY = 2 * (pPosY - ESpawnPPosY) / abs(pPosY - ESpawnPPosY);
+		EPVecX = 2 * (pCenterX - ESpawnPPosX) / abs(pCenterY - ESpawnPPosY);
+		EPVecY = 2 * (pCenterY - ESpawnPPosY) / abs(pCenterY - ESpawnPPosY);
 
 	}
 
