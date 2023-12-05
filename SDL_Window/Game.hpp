@@ -51,12 +51,18 @@ public:
 	static int ePosX3;
 	static int ePosX4;
 	static int ePosX5;
+	static int NPCPosX1;
+	static int NPCPosX2;
+	static int NPCPosX3;
 
 	static int ePosY1;
 	static int ePosY2;
 	static int ePosY3;
 	static int ePosY4;
 	static int ePosY5;
+	static int NPCPosY1;
+	static int NPCPosY2;
+	static int NPCPosY3;
 
 	static int eHP1;
 	static int eHP2;
@@ -84,6 +90,10 @@ public:
 		groupEnemies1,
 		groupEnemies2,
 		groupEnemies3,
+
+		groupNPC1,
+		groupNPC2,
+		groupNPC3,
 		
 		groupColliders,
 		groupProjectiles

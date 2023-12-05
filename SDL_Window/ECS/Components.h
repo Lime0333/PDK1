@@ -7,5 +7,5 @@
 #include"TileComponent.h"
 #include"ProjectileComponent.h"
 #include"UILabel.h"
-#include"Enemies/EnemiesComponent.h"
+#include"Enemies&NPCs/Enemies&NPCsComponent.h"
 

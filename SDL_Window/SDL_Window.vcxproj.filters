@@ -42,7 +42,7 @@
     <ClCompile Include="AssetManager.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="ECS\Enemies\EnemiesComponent.h">
+    <ClCompile Include="ECS\Enemies&amp;NPCs\Enemies&amp;NPCsComponent.h">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
   </ItemGroup>
@@ -98,19 +98,22 @@
     <ClInclude Include="ECS\UILabel.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="ECS\Enemies\E1.h">
+    <ClInclude Include="ECS\Enemies&amp;NPCs\E1.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="ECS\Enemies\E2.h">
+    <ClInclude Include="ECS\Enemies&amp;NPCs\E2.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="ECS\Enemies\E3.h">
+    <ClInclude Include="ECS\Enemies&amp;NPCs\E3.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="ECS\Enemies\E4.h">
+    <ClInclude Include="ECS\Enemies&amp;NPCs\E4.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="ECS\Enemies\E5.h">
+    <ClInclude Include="ECS\Enemies&amp;NPCs\E5.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Enemies&amp;NPCs\NPC1.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
   </ItemGroup>

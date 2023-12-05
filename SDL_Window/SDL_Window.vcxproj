@@ -150,7 +150,7 @@
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="ECS\ECS.cpp" />
-    <ClCompile Include="ECS\Enemies\EnemiesComponent.h" />
+    <ClCompile Include="ECS\Enemies&amp;NPCs\Enemies&amp;NPCsComponent.h" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="main.cpp" />
@@ -165,11 +165,12 @@
     <ClInclude Include="ECS\ColliderComponent.h" />
     <ClInclude Include="ECS\Components.h" />
     <ClInclude Include="ECS\ECS.h" />
-    <ClInclude Include="ECS\Enemies\E1.h" />
-    <ClInclude Include="ECS\Enemies\E2.h" />
-    <ClInclude Include="ECS\Enemies\E3.h" />
-    <ClInclude Include="ECS\Enemies\E4.h" />
-    <ClInclude Include="ECS\Enemies\E5.h" />
+    <ClInclude Include="ECS\Enemies&amp;NPCs\E1.h" />
+    <ClInclude Include="ECS\Enemies&amp;NPCs\E2.h" />
+    <ClInclude Include="ECS\Enemies&amp;NPCs\E3.h" />
+    <ClInclude Include="ECS\Enemies&amp;NPCs\E4.h" />
+    <ClInclude Include="ECS\Enemies&amp;NPCs\E5.h" />
+    <ClInclude Include="ECS\Enemies&amp;NPCs\NPC1.h" />
     <ClInclude Include="ECS\KeyboardController.h" />
     <ClInclude Include="ECS\ProjectileComponent.h" />
     <ClInclude Include="ECS\TileComponent.h" />

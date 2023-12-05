@@ -1,6 +1,6 @@
 #pragma once
 
-#include"Emovement.h"
+#include"../Components.h"
 
 class E1 :public Component {
 public:

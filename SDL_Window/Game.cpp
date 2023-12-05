@@ -6,7 +6,7 @@
 #include"Vector2D.h"
 #include"Collision.h"
 #include"AssetManager.h"
-#include"ECS/Enemies/EnemiesComponent.h"
+//#include"ECS/Enemies/EnemiesComponent.h"
 
 #include<sstream>
 #include <cmath>
@@ -31,6 +31,11 @@ auto& enemy1(manager.addEntity());
 auto& enemy2(manager.addEntity());
 auto& enemy3(manager.addEntity());
 
+
+auto& NPC1(manager.addEntity());
+auto& NPC2(manager.addEntity());
+auto& NPC3(manager.addEntity());
+
 auto& label(manager.addEntity());
 
 //0=right 1=left 2=up 3=down 4=right-up 5=right-down 6=left-up 7=left-down
@@ -52,12 +57,18 @@ int Game::ePosX2;
 int Game::ePosX3;
 int Game::ePosX4;
 int Game::ePosX5;
+int Game::NPCPosX1;
+int Game::NPCPosX2;
+int Game::NPCPosX3;
 
 int Game::ePosY1;
 int Game::ePosY2;
 int Game::ePosY3;
 int Game::ePosY4;
 int Game::ePosY5;
+int Game::NPCPosY1;
+int Game::NPCPosY2;
+int Game::NPCPosY3;
 
 int Game::eHP1 = 100;
 int Game::eHP2 = 100;
@@ -127,6 +138,12 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	assets->AddTexture("enemy1", "assets/characters/e1/eg1.png");
 	assets->AddTexture("enemy2", "assets/characters/e1/eg1.png");
 	assets->AddTexture("enemy3", "assets/characters/e1/eg1.png");
+	assets->AddTexture("enemy4", "assets/characters/e1/eg1.png");
+	assets->AddTexture("enemy5", "assets/characters/e1/eg1.png");
+
+	assets->AddTexture("NPC1", "assets/characters/ch3/ch3.png");
+	assets->AddTexture("NPC2", "assets/characters/ch3/ch3.png");
+	assets->AddTexture("NPC3", "assets/characters/ch3/ch3.png");
 
 
 	assets->AddTexture("projectileR", "assets/bullet/bulletR.png");
@@ -169,6 +186,27 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	enemy3.addComponent<E3>();
 	enemy3.addComponent<ColliderComponent>("enemy3");
 	enemy3.addGroup(groupEnemies3);
+
+
+	//----------NPC---------------
+
+	NPC1.addComponent<TransformComponent>(1000.0f, 340.0f, 32, 32, 4);
+	NPC1.addComponent<SpriteComponent>("NPC1", true);
+	NPC1.addComponent<E3>();
+	NPC1.addComponent<ColliderComponent>("NPC1");
+	NPC1.addGroup(groupNPC1);
+
+	NPC2.addComponent<TransformComponent>(780.0f, 240.0f, 32, 32, 4);
+	NPC2.addComponent<SpriteComponent>("NPC2", true);
+	NPC2.addComponent<E3>();
+	NPC2.addComponent<ColliderComponent>("NPC2");
+	NPC2.addGroup(groupNPC2);
+
+	NPC3.addComponent<TransformComponent>(520.0f, 440.0f, 32, 32, 4);
+	NPC3.addComponent<SpriteComponent>("NPC3", true);
+	NPC3.addComponent<E3>();
+	NPC3.addComponent<ColliderComponent>("NPC3");
+	NPC3.addGroup(groupNPC3);
 
 
 	SDL_Color white = { 255,255,255,255 };
@@ -289,6 +327,25 @@ void Game::update() {
 
 	ePosX3 = enemy3Pos.x;
 	ePosY3 = enemy3Pos.y;
+
+
+	SDL_Rect NPC1Col = enemy1.getComponent<ColliderComponent>().collider;
+	Vector2D NPC1Pos = enemy1.getComponent<TransformComponent>().position;
+
+	NPCPosX1 = NPC1Pos.x;
+	NPCPosY1 = NPC1Pos.y;
+
+	SDL_Rect NPC2Col = enemy1.getComponent<ColliderComponent>().collider;
+	Vector2D NPC2Pos = enemy1.getComponent<TransformComponent>().position;
+
+	NPCPosX2 = NPC2Pos.x;
+	NPCPosY2 = NPC2Pos.y;
+
+	SDL_Rect NPC3Col = enemy1.getComponent<ColliderComponent>().collider;
+	Vector2D NPC3Pos = enemy1.getComponent<TransformComponent>().position;
+
+	NPCPosX1 = NPC3Pos.x;
+	NPCPosY1 = NPC3Pos.y;
 
 
 
