@@ -27,6 +27,8 @@ bool Game::isRunning = false;
 
 auto& player(manager.addEntity());
 
+auto& flashlight(manager.addEntity());
+
 auto& enemy1(manager.addEntity());
 auto& enemy2(manager.addEntity());
 auto& enemy3(manager.addEntity());
@@ -45,6 +47,10 @@ int MAXHP = 100;
 int Game::kierunek = 0;
 int Game::pPosX; 
 int Game::pPosY;
+
+
+float Game::FlashPosX;
+float Game::FlashPosY;
 
 int Game::pCenterX;
 int Game::pCenterY;
@@ -86,6 +92,8 @@ const int Game::MAXammo = 5;
 int Game::ammo = Game::MAXammo;
 char ammoString[Game::MAXammo], HPString[20];
 int cooldownVLC;
+
+bool Game::unpaused = true;
 
 Game::Game()
 {}
@@ -135,6 +143,8 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	assets->AddTexture("terrain", "assets/bg/terrain_ss.png");
 	assets->AddTexture("player", "assets/characters/ch1/ch1,2.png");
 
+	assets->AddTexture("flashlight", "assets/menu/menu.png");
+
 	assets->AddTexture("enemy1", "assets/characters/e1/eg1.png");
 	assets->AddTexture("enemy2", "assets/characters/e1/eg1.png");
 	assets->AddTexture("enemy3", "assets/characters/e1/eg1.png");
@@ -167,6 +177,15 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	player.addComponent<KeyboardController>();
 	player.addComponent<ColliderComponent>("player");
 	player.addGroup(groupPlayers);
+
+
+	flashlight.addComponent<TransformComponent>(-100.0f, -100.0f, 640, 800, 1);
+	flashlight.addComponent<SpriteComponent>("flashlight", true);
+	flashlight.addComponent<Menu>();
+	flashlight.addComponent<ColliderComponent>("flashlight");
+	flashlight.addGroup(groupFlashlight);
+
+	std::cout << camera.x << ',' << camera.y << std::endl;
 
 
 	enemy1.addComponent<TransformComponent>(900.0f, 640.0f, 32, 32, 4);
@@ -231,6 +250,13 @@ auto& enemies1(manager.getGroup(Game::groupEnemies1));
 auto& enemies2(manager.getGroup(Game::groupEnemies2));
 auto& enemies3(manager.getGroup(Game::groupEnemies3));
 
+auto& NPC1s(manager.getGroup(Game::groupNPC1));
+auto& NPC2s(manager.getGroup(Game::groupNPC2));
+auto& NPC3s(manager.getGroup(Game::groupNPC3));
+
+auto& flashlights(manager.getGroup(Game::groupFlashlight));
+
+
 void Game::handleEvents() {
 
 	SDL_PollEvent(&event);
@@ -247,15 +273,17 @@ void Game::handleEvents() {
 
 void Game::update() {
 
-	if (cooldown > 0) {
-		cooldown--;
-	}
+	if(Game::unpaused){
+		if (cooldown > 0) {
+			cooldown--;
+		}
 
-	eCool1--;
-	eCool2--;
-	eCool3--;
-	eCool4--;
-	eCool5--;
+		eCool1--;
+		eCool2--;
+		eCool3--;
+		eCool4--;
+		eCool5--;
+	}
 
 	//std::cout << cooldown << std::endl;
 
@@ -329,25 +357,32 @@ void Game::update() {
 	ePosY3 = enemy3Pos.y;
 
 
-	SDL_Rect NPC1Col = enemy1.getComponent<ColliderComponent>().collider;
-	Vector2D NPC1Pos = enemy1.getComponent<TransformComponent>().position;
+	SDL_Rect NPC1Col = NPC1.getComponent<ColliderComponent>().collider;
+	Vector2D NPC1Pos = NPC1.getComponent<TransformComponent>().position;
 
 	NPCPosX1 = NPC1Pos.x;
 	NPCPosY1 = NPC1Pos.y;
 
-	SDL_Rect NPC2Col = enemy1.getComponent<ColliderComponent>().collider;
-	Vector2D NPC2Pos = enemy1.getComponent<TransformComponent>().position;
+	SDL_Rect NPC2Col = NPC2.getComponent<ColliderComponent>().collider;
+	Vector2D NPC2Pos = NPC2.getComponent<TransformComponent>().position;
 
 	NPCPosX2 = NPC2Pos.x;
 	NPCPosY2 = NPC2Pos.y;
 
-	SDL_Rect NPC3Col = enemy1.getComponent<ColliderComponent>().collider;
-	Vector2D NPC3Pos = enemy1.getComponent<TransformComponent>().position;
+	SDL_Rect NPC3Col = NPC3.getComponent<ColliderComponent>().collider;
+	Vector2D NPC3Pos = NPC3.getComponent<TransformComponent>().position;
 
 	NPCPosX1 = NPC3Pos.x;
 	NPCPosY1 = NPC3Pos.y;
 
 
+	Vector2D Flashlight = flashlight.getComponent<TransformComponent>().position;
+
+	Game::FlashPosX = Flashlight.x;
+	Game::FlashPosY = Flashlight.y;
+
+
+	//std::cout << FlashPosX<<','<< FlashPosY<<std::endl;
 
 
 	//std::cout << playerPos.x<<"      "<<playerPos.y << std::endl;
@@ -559,6 +594,20 @@ void Game::render()
 		e->draw();
 	}
 	for (auto& e : enemies2) {
+		e->draw();
+	}
+
+	for (auto& e : NPC1s) {
+		e->draw();
+	}
+	for (auto& e : NPC2s) {
+		e->draw();
+	}
+	for (auto& e : NPC3s) {
+		e->draw();
+	}
+
+	for (auto& e : flashlights) {
 		e->draw();
 	}
 

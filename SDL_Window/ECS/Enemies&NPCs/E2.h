@@ -34,7 +34,7 @@ public:
 			alive = false;
 		}
 
-		if (alive) {
+		if (alive and Game::unpaused) {
 
 			if (cool < 0) {
 				Game::ESpawnP(Eid, kierunek);

@@ -1,0 +1,9 @@
+Controls:
+
+WASD - walking
+
+L_Shift - shoot
+
+R - reload
+
+M - do not click

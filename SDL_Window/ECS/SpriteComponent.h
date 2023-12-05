@@ -45,6 +45,15 @@ public:
 		Animation idleL = Animation(6, 1, 100);
 		Animation walkL = Animation(7, 2, 250);
 
+		Animation Menu0 = Animation(0, 5, 1);
+		Animation Menu1 = Animation(1, 1, 200);
+		Animation Menu2 = Animation(2, 1, 200);
+		Animation Menu3 = Animation(3, 1, 200);
+		Animation Menu4 = Animation(4, 1, 200);
+		Animation Menu5 = Animation(5, 1, 200);
+		Animation Menu6 = Animation(6, 1, 200);
+		Animation MenuBlank = Animation(7, 1, 200);
+
 		animations.emplace("Idle", idle);
 		animations.emplace("Walk", walk);
 
@@ -56,6 +65,16 @@ public:
 
 		animations.emplace("IdleL", idleL);
 		animations.emplace("WalkL", walkL);
+
+
+		animations.emplace("Menu0", Menu0);
+		animations.emplace("Menu1", Menu1);
+		animations.emplace("Menu2", Menu2);
+		animations.emplace("Menu3", Menu3);
+		animations.emplace("Menu4", Menu4);
+		animations.emplace("Menu5", Menu5);
+		animations.emplace("Menu6", Menu6);
+		animations.emplace("MenuBlank", MenuBlank);
 
 
 		Play("Idle");

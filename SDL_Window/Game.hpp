@@ -32,6 +32,7 @@ public:
 	void clean();
 
 
+	static bool unpaused;
 	
 	static SDL_Renderer *renderer;
 	static SDL_Event event;
@@ -79,6 +80,10 @@ public:
 	static int pPosX;
 	static int pPosY;
 
+
+	static float FlashPosX;
+	static float FlashPosY;
+
 	static int pCenterX;
 	static int pCenterY;
 
@@ -86,6 +91,8 @@ public:
 	enum groupLabels : std::size_t {
 		groupMap,
 		groupPlayers,
+
+		groupFlashlight,
 
 		groupEnemies1,
 		groupEnemies2,

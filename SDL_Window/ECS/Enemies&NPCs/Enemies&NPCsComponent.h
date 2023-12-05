@@ -7,3 +7,5 @@
 #include"E5.h"
 
 #include"NPC1.h"
+
+#include"Menu.h"
