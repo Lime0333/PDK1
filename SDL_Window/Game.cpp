@@ -55,6 +55,8 @@ float Game::FlashPosY;
 int Game::pCenterX;
 int Game::pCenterY;
 
+int Game::skin = 0;
+
 int Game::HP = MAXHP;
 int Game::cooldown = 5;
 
@@ -143,7 +145,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	assets->AddTexture("terrain", "assets/bg/terrain_ss.png");
 	assets->AddTexture("player", "assets/characters/ch1/ch1,2.png");
 
-	assets->AddTexture("flashlight", "assets/menu/menu.png");
+	assets->AddTexture("flashlight", "assets/menu/menu50.png");
 
 	assets->AddTexture("enemy1", "assets/characters/e1/eg1.png");
 	assets->AddTexture("enemy2", "assets/characters/e1/eg1.png");
@@ -179,7 +181,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	player.addGroup(groupPlayers);
 
 
-	flashlight.addComponent<TransformComponent>(-100.0f, -100.0f, 640, 800, 1);
+	flashlight.addComponent<TransformComponent>(-100.0f, -100.0f, 320, 400, 2);
 	flashlight.addComponent<SpriteComponent>("flashlight", true);
 	flashlight.addComponent<Menu>();
 	flashlight.addComponent<ColliderComponent>("flashlight");
@@ -387,9 +389,14 @@ void Game::update() {
 
 	//std::cout << playerPos.x<<"      "<<playerPos.y << std::endl;
 
-	std::stringstream ss;
-	ss << "HP:  " << HPString <<"                        Ammo: "<< ammoString;
-	label.getComponent<UILabel>().SetLabelText(ss.str(), "comic");
+	if(Game::unpaused){
+		std::stringstream ss;
+		ss << "HP:  " << HPString << "                        Ammo: " << ammoString;
+		label.getComponent<UILabel>().SetLabelText(ss.str(), "comic");
+	}
+	else {
+		label.getComponent<UILabel>().SetLabelText(" ", "comic");
+	}
 	
 	manager.refresh();
 	manager.update();
@@ -425,6 +432,7 @@ void Game::update() {
 		camera.y = camera.h;
 	}
 }
+
 
 void Game::spawnProjectile() {
 	if(cooldown<=0 and ammo>0){

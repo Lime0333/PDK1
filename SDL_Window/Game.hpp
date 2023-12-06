@@ -22,8 +22,7 @@ public:
 	void init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen);
 	
 	static void spawnProjectile();
-	static void ESpawnP(int Eid,int kierunek);
-	
+	static void ESpawnP(int Eid,int kierunek);	
 
 	void handleEvents();
 	void update();
@@ -43,6 +42,7 @@ public:
 	static int cooldown;
 	static int kierunek;
 	static int HP;
+	static int skin;
 	
 	static int ammo;
 	static const int MAXammo;

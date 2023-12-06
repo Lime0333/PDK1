@@ -33,17 +33,17 @@ public:
 	SpriteComponent(std::string id, bool isAnimated) {
 		animated = isAnimated;
 
-		Animation idle = Animation(0, 1, 100);
-		Animation walk = Animation(1, 2, 250);
+		Animation idle = Animation(0 + Game::skin, 1, 100);
+		Animation walk = Animation(1 + Game::skin, 2, 250);
 
-		Animation idleUP = Animation(2, 1, 100);
-		Animation walkUP = Animation(3, 2, 250);
+		Animation idleUP = Animation(2 + Game::skin, 1, 100);
+		Animation walkUP = Animation(3 + Game::skin, 2, 250);
 
-		Animation idleDOWN = Animation(4, 1, 100);
-		Animation walkDOWN = Animation(5, 2, 250);
+		Animation idleDOWN = Animation(4 + Game::skin, 1, 100);
+		Animation walkDOWN = Animation(5 + Game::skin, 2, 250);
 
-		Animation idleL = Animation(6, 1, 100);
-		Animation walkL = Animation(7, 2, 250);
+		Animation idleL = Animation(6 + Game::skin, 1, 100);
+		Animation walkL = Animation(7 + Game::skin, 2, 250);
 
 		Animation Menu0 = Animation(0, 5, 1);
 		Animation Menu1 = Animation(1, 1, 200);
@@ -53,12 +53,12 @@ public:
 		Animation Menu5 = Animation(5, 1, 200);
 		Animation Menu6 = Animation(6, 1, 200);
 		Animation MenuBlank = Animation(7, 1, 200);
-		Animation Skin0 = Animation(8, 2, 10);
-		Animation Skin1 = Animation(9, 2, 10);
-		Animation Skin2 = Animation(10, 2, 10);
-		Animation Skin3 = Animation(11, 2, 200);
-		Animation Skin4 = Animation(12, 2, 200);
-		Animation Skin5 = Animation(13, 2, 200);
+		Animation Skin0 = Animation(8, 2, 500);
+		Animation Skin1 = Animation(9, 2, 500);
+		Animation Skin2 = Animation(10, 2, 500);
+		Animation Skin3 = Animation(11, 2, 500);
+		Animation Skin4 = Animation(12, 2, 500);
+		Animation Skin5 = Animation(13, 2, 500);
 
 		animations.emplace("Idle", idle);
 		animations.emplace("Walk", walk);

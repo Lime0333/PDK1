@@ -29,7 +29,7 @@ public:
 		CPosX = Game::camera.x;
 		CPosY = Game::camera.y;
 
-		sprite->Play("MenuBlank");
+		
 
 		//transform->velocity.y = 0;
 		//transform->velocity.x = 0;
@@ -86,13 +86,14 @@ public:
 				break;
 
 			default:
+				sprite->Play("MenuBlank");
 				break;
 			}
 
 		}
 
 		else if (Game::unpaused == false and SkinChanging) {
-			switch (MChoose)
+			switch (SChoose)
 			{
 			case 1:
 				sprite->Play("Skin1");
@@ -118,6 +119,8 @@ public:
 		else {
 			sprite->Play("MenuBlank");
 		}
+
+		
 
 		if (Game::unpaused == false and menuOpening == false and SkinChanging==false) {
 			if (Game::event.type == SDL_KEYUP) {
@@ -203,31 +206,9 @@ public:
 				case SDLK_SPACE:
 				case SDLK_RETURN:
 					system("BAT\\menuCLICK.bat");
-					switch (MChoose) {
-					case 1:
-						
-						SkinChanging = false;
-						break;
-					case 2:
-						
-						SkinChanging = false;
-						break;
-					case 3:
-
-						SkinChanging = false;
-						break;
-					case 4:
-						SkinChanging = false;
-						
-						break;
-					case 5:
-
-						SkinChanging = false;
-						break;
-					default:
-						break;
-					}
-					break;
+					Game::skin = 7 * (SChoose - 1);
+					std::cout << "skin " << Game::skin<<std::endl;
+					SkinChanging = false;
 				case SDLK_p:
 					menuCool = 50;
 					Game::unpaused = true;
