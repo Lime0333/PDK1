@@ -53,6 +53,12 @@ public:
 		Animation Menu5 = Animation(5, 1, 200);
 		Animation Menu6 = Animation(6, 1, 200);
 		Animation MenuBlank = Animation(7, 1, 200);
+		Animation Skin0 = Animation(8, 2, 10);
+		Animation Skin1 = Animation(9, 2, 10);
+		Animation Skin2 = Animation(10, 2, 10);
+		Animation Skin3 = Animation(11, 2, 200);
+		Animation Skin4 = Animation(12, 2, 200);
+		Animation Skin5 = Animation(13, 2, 200);
 
 		animations.emplace("Idle", idle);
 		animations.emplace("Walk", walk);
@@ -75,6 +81,12 @@ public:
 		animations.emplace("Menu5", Menu5);
 		animations.emplace("Menu6", Menu6);
 		animations.emplace("MenuBlank", MenuBlank);
+		animations.emplace("Skin0", Skin0);
+		animations.emplace("Skin1", Skin1);
+		animations.emplace("Skin2", Skin2);
+		animations.emplace("Skin3", Skin3);
+		animations.emplace("Skin4", Skin4);
+		animations.emplace("Skin5", Skin5);
 
 
 		Play("Idle");

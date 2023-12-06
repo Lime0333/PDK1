@@ -15,7 +15,9 @@ public:
 	bool menuOpening = false;
 	int menuCool = 0;
 
-	int MChoose = 1;
+	bool SkinChanging = false;
+
+	int MChoose = 1, SChoose=1;
 
 	void init() override {
 		transform = &entity->getComponent<TransformComponent>();
@@ -64,7 +66,7 @@ public:
 				menuOpening = false;
 			}
 		}
-		else if(Game::unpaused==false){
+		else if(Game::unpaused==false and SkinChanging==false){
 			switch (MChoose)
 			{
 			case 1:
@@ -86,12 +88,38 @@ public:
 			default:
 				break;
 			}
+
 		}
+
+		else if (Game::unpaused == false and SkinChanging) {
+			switch (MChoose)
+			{
+			case 1:
+				sprite->Play("Skin1");
+				break;
+			case 2:
+				sprite->Play("Skin2");
+				break;
+			case 3:
+				sprite->Play("Skin3");
+				break;
+			case 4:
+				sprite->Play("Skin4");
+				break;
+			case 5:
+				sprite->Play("Skin5");
+				break;
+
+			default:
+				break;
+			}
+		}
+
 		else {
 			sprite->Play("MenuBlank");
 		}
 
-		if (Game::unpaused == false and menuOpening == false) {
+		if (Game::unpaused == false and menuOpening == false and SkinChanging==false) {
 			if (Game::event.type == SDL_KEYUP) {
 				switch (Game::event.key.keysym.sym) {
 				case SDLK_e:
@@ -108,6 +136,9 @@ public:
 						break;
 					case 2:
 						//change skin
+
+						SkinChanging = true;
+
 						break;
 					case 3:
 						Game::isRunning = false;
@@ -159,6 +190,81 @@ public:
 				}
 				else if (MChoose > 5) {
 					MChoose = 1;
+				}
+
+
+			}
+		}
+
+		else if (Game::unpaused == false and menuOpening == false and SkinChanging) {
+			if (Game::event.type == SDL_KEYUP) {
+				switch (Game::event.key.keysym.sym) {
+				case SDLK_e:
+				case SDLK_SPACE:
+				case SDLK_RETURN:
+					system("BAT\\menuCLICK.bat");
+					switch (MChoose) {
+					case 1:
+						
+						SkinChanging = false;
+						break;
+					case 2:
+						
+						SkinChanging = false;
+						break;
+					case 3:
+
+						SkinChanging = false;
+						break;
+					case 4:
+						SkinChanging = false;
+						
+						break;
+					case 5:
+
+						SkinChanging = false;
+						break;
+					default:
+						break;
+					}
+					break;
+				case SDLK_p:
+					menuCool = 50;
+					Game::unpaused = true;
+					system("BAT\\wait1.bat");
+					system("BAT\\menuONOFF.bat");
+
+					break;
+				case SDLK_UP:
+					system("BAT\\menuSwitch.bat");
+					system("BAT\\wait02.bat");
+					SChoose--;
+					break;
+				case SDLK_w:
+					system("BAT\\menuSwitch.bat");
+					system("BAT\\wait02.bat");
+					SChoose--;
+					break;
+				case SDLK_DOWN:
+					system("BAT\\menuSwitch.bat");
+					system("BAT\\wait02.bat");
+					SChoose++;
+					break;
+				case SDLK_s:
+					system("BAT\\menuSwitch.bat");
+					system("BAT\\wait02.bat");
+					SChoose++;
+					break;
+				default:
+
+					break;
+				}
+
+				if (SChoose < 1) {
+					SChoose = 5;
+				}
+				else if (SChoose > 5) {
+					SChoose = 1;
 				}
 
 

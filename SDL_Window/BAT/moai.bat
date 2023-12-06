@@ -1,3 +1,4 @@
+
 start "" "C:\Program Files\VideoLAN\VLC\vlc.exe" --qt-start-minimized assets/sounds/moai.mp4
 timeout /t 1
 

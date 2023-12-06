@@ -157,6 +157,10 @@ public:
 
 		}
 
+		if (Game::unpaused == false) {
+			transform->velocity.x = 0;
+			transform->velocity.y = 0;
+		}
 
 	}
 

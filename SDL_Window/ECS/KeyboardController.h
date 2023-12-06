@@ -56,8 +56,6 @@ public:
 				case SDLK_w:
 					transform->velocity.y = 0;
 					sprite->Play("IdleUP");
-
-
 					if (aniUD == 1) {
 						aniUD = 0;
 					}
@@ -163,6 +161,13 @@ public:
 
 				}
 			}
+
+
+
+		}
+		if (Game::unpaused == false) {
+			transform->velocity.x = 0;
+			transform->velocity.y = 0;
 		}
 
 	}
