@@ -55,7 +55,15 @@ public:
 				switch (Game::event.key.keysym.sym) {
 				case SDLK_w:
 					transform->velocity.y = 0;
-					sprite->Play("IdleUP");
+
+					switch (Game::skin) {
+					case 1:
+						sprite->Play("IdleUP");
+					case 2:
+						sprite->Play("IdleUP2");
+					}
+					
+					
 					if (aniUD == 1) {
 						aniUD = 0;
 					}
@@ -64,7 +72,13 @@ public:
 
 				case SDLK_a:
 					transform->velocity.x = 0;
-					sprite->Play("IdleL");
+					switch(Game::skin){
+					case 1:
+						sprite->Play("IdleL");
+
+					case 2:
+						sprite->Play("IdleL2");
+					}
 
 
 					if (aniLR == 1) {
@@ -75,7 +89,15 @@ public:
 
 				case SDLK_d:
 					transform->velocity.x = 0;
-					sprite->Play("Idle");
+					switch(Game::skin){
+					case 1:
+
+						sprite->Play("Idle");
+					
+					case 2:
+						sprite->Play("Idle2");
+
+					}
 
 
 					if (aniLR == 2) {
@@ -86,7 +108,15 @@ public:
 
 				case SDLK_s:
 					transform->velocity.y = 0;
-					sprite->Play("IdleDOWN");
+					switch(Game::skin){
+					case 1:
+
+						sprite->Play("IdleDOWN");
+					
+					case 2:
+
+						sprite->Play("IdleDOWN2");
+					}
 					if (aniUD == 2) {
 						aniUD = 0;
 					}
@@ -119,7 +149,13 @@ public:
 			if (aniUD == 1) {
 				if (aniLR == 0) {
 					sprite->spriteFlip = SDL_FLIP_NONE;
-					sprite->Play("WalkUP");
+					switch(Game::skin){
+					case 1:
+						sprite->Play("WalkUP");
+					case 2:
+						sprite->Play("WalkUP2");
+
+					}
 					Game::kierunek = 2;
 				}
 				else if (aniLR == 1) {
@@ -134,7 +170,10 @@ public:
 			else if (aniUD == 2) {
 				if (aniLR == 0) {
 					sprite->spriteFlip = SDL_FLIP_HORIZONTAL;
-					sprite->Play("WalkDOWN");
+					switch (Game::skin) {
+					case 1:
+						sprite->Play("WalkDOWN2");
+					}
 					Game::kierunek = 3;
 				}
 				else if (aniLR == 1) {
@@ -149,7 +188,9 @@ public:
 			else if (aniUD == 0) {
 				if (aniLR == 1) {
 					sprite->spriteFlip = SDL_FLIP_NONE;
-					sprite->Play("WalkL");
+					switch{
+						sprite->Play("WalkL");
+					}
 					Game::kierunek = 1;
 				}
 				else if (aniLR == 2) {

@@ -120,7 +120,7 @@ public:
 			sprite->Play("MenuBlank");
 		}
 
-		
+		std::cout << Game::skin << std::endl;
 
 		if (Game::unpaused == false and menuOpening == false and SkinChanging==false) {
 			if (Game::event.type == SDL_KEYUP) {
@@ -164,25 +164,18 @@ public:
 					
 					break;
 				case SDLK_UP:
-					system("BAT\\menuSwitch.bat");
-					system("BAT\\wait02.bat");
-					MChoose--;
-					break;
 				case SDLK_w:
 					system("BAT\\menuSwitch.bat");
 					system("BAT\\wait02.bat");
 					MChoose--;
 					break;
 				case SDLK_DOWN:
-					system("BAT\\menuSwitch.bat");
-					system("BAT\\wait02.bat");
-					MChoose++;
-					break;
 				case SDLK_s:
 					system("BAT\\menuSwitch.bat");
 					system("BAT\\wait02.bat");
 					MChoose++;
 					break;
+
 				default:
 
 					break;
@@ -198,6 +191,7 @@ public:
 
 			}
 		}
+		
 
 		else if (Game::unpaused == false and menuOpening == false and SkinChanging) {
 			if (Game::event.type == SDL_KEYUP) {
@@ -206,8 +200,7 @@ public:
 				case SDLK_SPACE:
 				case SDLK_RETURN:
 					system("BAT\\menuCLICK.bat");
-					Game::skin = 7 * (SChoose - 1);
-					std::cout << "skin " << Game::skin<<std::endl;
+					Game::skin = SChoose;
 					SkinChanging = false;
 				case SDLK_p:
 					menuCool = 50;
@@ -216,26 +209,25 @@ public:
 					system("BAT\\menuONOFF.bat");
 
 					break;
+				case SDLK_a:
+				case SDLK_LEFT:
 				case SDLK_UP:
-					system("BAT\\menuSwitch.bat");
-					system("BAT\\wait02.bat");
-					SChoose--;
-					break;
 				case SDLK_w:
 					system("BAT\\menuSwitch.bat");
 					system("BAT\\wait02.bat");
 					SChoose--;
 					break;
+
+				case SDLK_d:
+				case SDLK_RIGHT:
 				case SDLK_DOWN:
-					system("BAT\\menuSwitch.bat");
-					system("BAT\\wait02.bat");
-					SChoose++;
-					break;
 				case SDLK_s:
 					system("BAT\\menuSwitch.bat");
 					system("BAT\\wait02.bat");
 					SChoose++;
 					break;
+				case SDLK_ESCAPE:
+					SkinChanging = false;
 				default:
 
 					break;

@@ -33,17 +33,32 @@ public:
 	SpriteComponent(std::string id, bool isAnimated) {
 		animated = isAnimated;
 
-		Animation idle = Animation(0 + Game::skin, 1, 100);
-		Animation walk = Animation(1 + Game::skin, 2, 250);
+		Animation idle = Animation(0, 1, 100);
+		Animation walk = Animation(1, 2, 250);
 
-		Animation idleUP = Animation(2 + Game::skin, 1, 100);
-		Animation walkUP = Animation(3 + Game::skin, 2, 250);
+		Animation idleUP = Animation(2, 1, 100);
+		Animation walkUP = Animation(3, 2, 250);
 
-		Animation idleDOWN = Animation(4 + Game::skin, 1, 100);
-		Animation walkDOWN = Animation(5 + Game::skin, 2, 250);
+		Animation idleDOWN = Animation(4, 1, 100);
+		Animation walkDOWN = Animation(5, 2, 250);
 
-		Animation idleL = Animation(6 + Game::skin, 1, 100);
-		Animation walkL = Animation(7 + Game::skin, 2, 250);
+		Animation idleL = Animation(6, 1, 100);
+		Animation walkL = Animation(7, 2, 250);
+		
+
+
+		Animation idle2 = Animation(8, 1, 100);
+		Animation walk2 = Animation(9, 2, 250);
+
+		Animation idleUP2 = Animation(10, 1, 100);
+		Animation walkUP2 = Animation(11, 2, 250);
+
+		Animation idleDOWN2 = Animation(12, 1, 100);
+		Animation walkDOWN2 = Animation(13, 2, 250);
+
+		Animation idleL2 = Animation(14, 1, 100);
+		Animation walkL2 = Animation(15, 2, 250);
+
 
 		Animation Menu0 = Animation(0, 5, 1);
 		Animation Menu1 = Animation(1, 1, 200);
